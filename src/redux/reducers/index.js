@@ -1,4 +1,4 @@
-import {combineReducers as rootReducer} from 'react-redux';
+import {combineReducers as rootReducer} from 'redux';
 
 export default rootReducer({
     // add reducers

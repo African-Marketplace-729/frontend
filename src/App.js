@@ -9,7 +9,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      African Marketplace 
+      <h1>African Marketplace</h1>
       {/* Delete <br> and <hr> when styling */}
       <br/><br/><hr/><br/>
       <Switch>
@@ -22,7 +22,7 @@ function App() {
 
       {/* Move Links to other components when */}
       {/* the components are completed.       */}
-      
+
       <br/><hr/><br/>
       <Link to='/signin'>Already have an account?</Link>
       <br/><br/><hr/><br/>

@@ -4,6 +4,7 @@ import {PrivateRoute} from './utils/PrivateRoute';
 
 import Register from './components/Register';
 import Signin from './components/Signin';
+import UserProfile from './components/UserProfile';
 import './App.css';
 
 function App() {
@@ -27,6 +28,10 @@ function App() {
       <Link to='/signin'>Already have an account?</Link>
       <br/><br/><hr/><br/>
       <Link to='/register'>Create an account.</Link>
+      <br/><br/><hr/><br/>
+      {/* User Profile will live somewhere else. */}
+      {/* But so it's visible, it is here        */}
+      <UserProfile />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const initialValues = {
   username: "",
@@ -47,6 +48,7 @@ export default function Register() {
           onChange={onChange}
         />
       </label>
+      <button>Register</button>
     </form>
   );
 }

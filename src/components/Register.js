@@ -55,6 +55,15 @@ export default function Register() {
       username: values.username.trim(),
       password: values.password.trim(),
     };
+
+    axios
+      .post("https://reqres.in/api/users", newUser)
+      .then(res => {
+        console.log(res.data);
+        setValues(initialValues);
+        setErrors(initialErrors);
+      })
+      .catch(err => console.log(err));
   };
 
   useEffect(() => {

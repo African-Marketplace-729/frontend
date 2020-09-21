@@ -29,8 +29,10 @@ function App() {
       <br/><br/><hr/><br/>
       <Link to='/register'>Create an account.</Link>
       <br/><br/><hr/><br/>
+
       {/* User Profile will live somewhere else. */}
       {/* But so it's visible, it is here        */}
+      
       <UserProfile />
     </div>
   );

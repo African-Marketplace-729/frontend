@@ -25,7 +25,8 @@ export default function Register() {
     const newUser = {
       username: values.username.trim(),
       password: values.password.trim(),
-
+    }
+    
     axiosWithAuth().post(
       '/login',
       `grant_type=password&username=${newUser.username}&password=${newUser.password}`,

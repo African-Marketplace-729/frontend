@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axiosWithAuth from "../utils/axiosWithAuth";
 import * as yup from "yup";
 import schema from "../validation/schema";
+
 
 const initialValues = {
   username: "",
@@ -46,13 +47,25 @@ export default function Register() {
     });
   };
 
+
   const onSubmit = e => {
     e.preventDefault();
 
     const newUser = {
       username: values.username.trim(),
       password: values.password.trim(),
-    };
+    }
+    
+    axiosWithAuth().post(
+      '/login',
+      `grant_type=password&username=${newUser.username}&password=${newUser.password}`,
+      {headers: {
+        // btoa is converting our client id/client secret into base64
+            Authorization: `Basic ${btoa('lambda-client:lambda-secret')}`,
+            'Content-Type': 'application/x-www-form-urlencoded'}})
+        .then(res => {
+          localStorage.setItem('token', res.data.payload)})
+        .catch(err => console.log(err));
   };
 
   useEffect(() => {

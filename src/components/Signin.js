@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import * as yup from "yup";
-import schema from "../validation/schema";
+import schema from "../validation/loginSchema";
 
 const initialValues = {
   username: "",

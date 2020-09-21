@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import * as yup from "yup";
-import schema from "../validation/schema";
+import schema from "../validation/registerSchema";
 
 
 const initialValues = {
   username: "",
   password: "",
+  passwordConfirm: "",
 };
 
 const initialErrors = {
   username: "",
   password: "",
+  passwordConfirm: "",
 };
 
 export default function Register() {
@@ -95,10 +97,20 @@ export default function Register() {
           onChange={onChange}
         />
       </label>
+      <label htmlFor="passwordConfirm">
+        Confirm Password
+        <input
+          type="password"
+          name="passwordConfirm"
+          value={values.passwordConfirm}
+          onChange={onChange}
+        />
+      </label>
       <article>
         <button disabled={disabled}>Register</button>
         <p>{errors.username}</p>
         <p>{errors.password}</p>
+        <p>{errors.passwordConfirm}</p>
       </article>
     </form>
   );

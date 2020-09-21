@@ -62,6 +62,7 @@ export default function Register() {
         console.log(res.data);
         setValues(initialValues);
         setErrors(initialErrors);
+        console.log("Submitted");
       })
       .catch(err => console.log(err));
   };
@@ -71,6 +72,10 @@ export default function Register() {
       setDisabled(!valid);
     });
   }, [values]);
+
+  useEffect(() => {
+    console.log("Errors updated:", errors);
+  }, [errors]);
 
   return (
     <form className="register-container" onSubmit={onSubmit}>

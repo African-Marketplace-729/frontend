@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
+import * as yup from "yup";
+import schema from "../validation/schema";
+
 
 const initialValues = {
+  username: "",
+  password: "",
+};
+
+const initialErrors = {
   username: "",
   password: "",
 };
@@ -9,9 +17,30 @@ const initialValues = {
 export default function Register() {
   const [values, setValues] = useState(initialValues);
   const [users, setUsers] = useState([]);
+  const [errors, setErrors] = useState(initialErrors);
+  const [disabled, setDisabled] = useState(true);
+
+  const validate = (name, value) => {
+    yup
+      .reach(schema, name)
+      .validate(value)
+      .then(valid => {
+        setErrors({
+          ...errors,
+          [name]: "",
+        });
+      })
+      .catch(err => {
+        setErrors({
+          ...errors,
+          [name]: err.errors[0],
+        });
+      });
+  };
 
   const onChange = e => {
     const { name, value } = e.target;
+    validate(name, value);
     setValues({
       ...values,
       [name]: value,
@@ -39,6 +68,12 @@ export default function Register() {
         .catch(err => console.log(err));
   };
 
+  useEffect(() => {
+    schema.isValid(values).then(valid => {
+      setDisabled(!valid);
+    });
+  }, [values]);
+
   return (
     <form className="register-container" onSubmit={onSubmit}>
       <h2>Sign Up</h2>
@@ -60,7 +95,11 @@ export default function Register() {
           onChange={onChange}
         />
       </label>
-      <button>Register</button>
+      <article>
+        <button disabled={disabled}>Register</button>
+        <p>{errors.username}</p>
+        <p>{errors.password}</p>
+      </article>
     </form>
   );
 }

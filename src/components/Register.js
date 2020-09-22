@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from "react";
+
+import React, { useState, useEffect, useRef } from "react";
+
 import axiosWithAuth from "../utils/axiosWithAuth";
+
 import * as yup from "yup";
 import schema from "../validation/registerSchema";
 
@@ -21,6 +24,7 @@ export default function Register() {
   const [users, setUsers] = useState([]);
   const [errors, setErrors] = useState(initialErrors);
   const [disabled, setDisabled] = useState(true);
+  const confirmRef = useRef();
 
   const validate = (name, value) => {
     yup
@@ -33,6 +37,7 @@ export default function Register() {
         });
       })
       .catch(err => {
+        console.log("Catch:", err);
         setErrors({
           ...errors,
           [name]: err.errors[0],
@@ -56,6 +61,7 @@ export default function Register() {
     const newUser = {
       username: values.username.trim(),
       password: values.password.trim(),
+
     }
     
     axiosWithAuth().post(
@@ -68,13 +74,29 @@ export default function Register() {
         .then(res => {
           localStorage.setItem('token', res.data.payload)})
         .catch(err => console.log(err));
+
   };
 
   useEffect(() => {
-    schema.isValid(values).then(valid => {
-      setDisabled(!valid);
-    });
+    if (confirmRef.current.value === values.password) {
+      setErrors({ ...errors, passwordConfirm: "" });
+    }
+  }, [disabled]);
+
+  useEffect(() => {
+    schema
+      .isValid({
+        ...values,
+        passwordConfirm: confirmRef.current.value,
+      })
+      .then(valid => {
+        setDisabled(!valid);
+      });
   }, [values]);
+
+  useEffect(() => {
+    console.log("Errors updated:", errors);
+  }, [errors]);
 
   return (
     <form className="register-container" onSubmit={onSubmit}>
@@ -100,6 +122,7 @@ export default function Register() {
       <label htmlFor="passwordConfirm">
         Confirm Password
         <input
+          ref={confirmRef}
           type="password"
           name="passwordConfirm"
           value={values.passwordConfirm}

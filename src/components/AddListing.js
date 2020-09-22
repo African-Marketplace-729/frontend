@@ -26,57 +26,30 @@ export default function AddListing() {
         Category
         <select name="category" value={values.category}>
           <option value="">--Select a Category--</option>
-          {SAUTI_PRODUCTS.map(item => {
+          {SAUTI_PRODUCT_CATEGORIES.map(item => {
             return <option value={item.category}>{item.category}</option>;
           })}
         </select>
       </label>
-      <label htmlFor="subcategory">Subcategory{}</label>
+      <label htmlFor="subcategory">
+        Subcategory
+        <option value="">--Select a Subcategory--</option>
+        {SAUTI_PRODUCT_SUBCATEGORIES.map(item => {
+          if (item.category === values.category)
+            return <option value={item.subcategory}>{item.subcategory}</option>;
+          return null;
+        })}
+      </label>
+      <label htmlFor="product">
+        <select name="product">
+          <option value="">--Select a Product</option>
+          {SAUTI_PRODUCTS.map(item => {
+            if (item.subcategory === values.subcategory)
+              return <option value={item.product}>{item.product}</option>;
+            return null;
+          })}
+        </select>
+      </label>
     </form>
   );
 }
-
-const Subcategory = ({ condition, values }) => {
-  if (condition === "Animal Products") {
-    return (
-      <select name="subcategory" value={values.subcategory}>
-        <option value="Animal Products">Animal Products</option>
-        <option value="Livestock">Livestock</option>
-        <option value="Poultry">Poultry</option>
-      </select>
-    );
-  } else if (condition === "Beans") {
-    return (
-      <select name="subcategory" value={values.subcategory}>
-        <option value="Beans">Beans</option>
-      </select>
-    );
-  } else if (condition === "Cereals - Maize") {
-    return (
-      <select name="subcategory" value={values.subcategory}>
-        <option value="Maize">Maize</option>
-      </select>
-    );
-  } else if (condition === "Cereals - Rice") {
-    return (
-      <select name="subcategory" value={values.subcategory}>
-        <option value="Rice">Rice</option>
-      </select>
-    );
-  } else if (condition === "Cereals - Other") {
-    return (
-      <select name="subcategory" value={values.subcategory}>
-        <option value="Barley">Barley</option>
-        <option value="Millet">Millet</option>
-        <option value="Sorghum">Sorghum</option>
-        <option value="Wheat">Wheat</option>
-      </select>
-    );
-  } else if (condition === "Fruits") {
-    return (
-      <select name="subcategory" value={values.subcategory}>
-        <option value=""></option>
-      </select>
-    );
-  }
-};

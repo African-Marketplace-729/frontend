@@ -33,7 +33,6 @@ export default function Register() {
         });
       })
       .catch(err => {
-        console.log("Catch:", err);
         setErrors({
           ...errors,
           [name]: err.errors[0],
@@ -71,7 +70,7 @@ export default function Register() {
     if (confirmRef.current.value === values.password) {
       setErrors({ ...errors, passwordConfirm: "" });
     }
-  }, [disabled]);
+  }, [disabled]); // eslint-disable-line
 
   useEffect(() => {
     schema
@@ -83,10 +82,6 @@ export default function Register() {
         setDisabled(!valid);
       });
   }, [values]);
-
-  useEffect(() => {
-    console.log("Errors updated:", errors);
-  }, [errors]);
 
   return (
     <form className="register-container" onSubmit={onSubmit}>

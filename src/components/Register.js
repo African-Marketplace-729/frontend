@@ -59,10 +59,8 @@ export default function Register() {
     axios
       .post("https://reqres.in/api/users", newUser)
       .then(res => {
-        console.log(res.data);
         setValues(initialValues);
         setErrors(initialErrors);
-        console.log("Submitted");
       })
       .catch(err => console.log(err));
   };

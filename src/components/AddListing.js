@@ -1,24 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   SAUTI_PRODUCT_CATEGORIES,
   SAUTI_PRODUCT_SUBCATEGORIES,
   SAUTI_PRODUCTS,
 } from "../consts";
+import * as yup from "yup";
+import schema from "../validation/addListingSchema";
 
 const initialValues = {
   name: "",
   description: "",
   category: "",
   subcategory: "",
-  quantity: null,
-  price: null,
+  quantity: 0,
+  price: 0,
+};
+
+const initialErrors = {
+  name: "",
+  description: "",
+  category: "",
+  subcategory: "",
+  quantity: "",
+  price: "",
 };
 
 export default function AddListing() {
   const [values, setValues] = useState(initialValues);
+  const [errors, setErrors] = useState(initialErrors);
+  const [disabled, setDisabled] = useState(true);
+
+  const validate = (name, value) => {
+    yup
+      .reach(schema, name)
+      .validate(value)
+      .then(valid => {
+        setErrors({
+          ...errors,
+          [name]: "",
+        });
+      })
+      .catch(err => {
+        setErrors({
+          ...errors,
+          [name]: err.errors[0],
+        });
+      });
+  };
 
   const onChange = e => {
     const { name, value } = e.target;
+    validate(name, value);
     setValues({
       ...values,
       [name]: value,
@@ -29,11 +61,17 @@ export default function AddListing() {
     e.preventDefault();
   };
 
+  useEffect(() => {
+    schema.isValid(values).then(valid => {
+      setDisabled(!valid);
+    });
+  }, [values]);
+
   return (
     <form onSubmit={onSubmit}>
       <h2>Add a Listing</h2>
       <label htmlFor="name">
-        Name
+        Listing Name
         <input type="text" name="name" onChange={onChange} />
       </label>
       <label htmlFor="description">
@@ -102,7 +140,14 @@ export default function AddListing() {
           onChange={onChange}
         />
       </label>
-      <button>Add</button>
+      <button disabled={disabled}>Add</button>
+      <p>{errors.name}</p>
+      <p>{errors.description}</p>
+      <p>{errors.category}</p>
+      <p>{errors.subcategory}</p>
+      <p>{errors.product}</p>
+      <p>{errors.quantity}</p>
+      <p>{errors.price}</p>
     </form>
   );
 }

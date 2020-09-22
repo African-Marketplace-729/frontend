@@ -4,6 +4,7 @@ import {PrivateRoute} from './utils/PrivateRoute';
 
 import Register from './components/Register';
 import Signin from './components/Signin';
+import AddListing from './components/AddListing'
 import UserProfile from './components/UserProfile';
 import PriceCheck from './components/PriceCheck';
 import './App.css';
@@ -34,6 +35,7 @@ function App() {
       {/* User Profile will live somewhere else. */}
       {/* But so it's visible, it is here        */}
       <PriceCheck />
+      <AddListing />
       <UserProfile />
       
     </div>

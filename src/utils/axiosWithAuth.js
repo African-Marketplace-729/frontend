@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 export default function AxiosWithAuth(){
+    const token = localStorage.getItem('token');
     return axios.create({
         baseURL: 'http://localhost:5000',
-        headers: {authorization: localStorage.getItem('token')}
+        headers: {authorization: `Bearer ${token}`}
     })
 }

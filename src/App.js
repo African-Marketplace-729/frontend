@@ -34,6 +34,8 @@ function App() {
 
       {/* User Profile will live somewhere else. */}
       {/* But so it's visible, it is here        */}
+      <PriceCheck />
+      <AddListing />
       <UserProfile />
       <AddListing />
       <Listings />

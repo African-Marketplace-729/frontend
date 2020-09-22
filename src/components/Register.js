@@ -32,6 +32,7 @@ export default function Register() {
         });
       })
       .catch(err => {
+        console.log("Catch:", err);
         setErrors({
           ...errors,
           [name]: err.errors[0],

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import * as yup from "yup";
 import schema from "../validation/registerSchema";
@@ -20,6 +20,7 @@ export default function Register() {
   const [users, setUsers] = useState([]);
   const [errors, setErrors] = useState(initialErrors);
   const [disabled, setDisabled] = useState(true);
+  const confirmRef = useRef();
 
   const validate = (name, value) => {
     yup
@@ -42,6 +43,9 @@ export default function Register() {
 
   const onChange = e => {
     const { name, value } = e.target;
+    if (name === "passwordConfirm") {
+      validate(name, confirmRef.current.value);
+    }
     validate(name, value);
     setValues({
       ...values,
@@ -67,9 +71,14 @@ export default function Register() {
   };
 
   useEffect(() => {
-    schema.isValid(values).then(valid => {
-      setDisabled(!valid);
-    });
+    schema
+      .isValid({
+        ...values,
+        passwordConfirm: confirmRef.current.value,
+      })
+      .then(valid => {
+        setDisabled(!valid);
+      });
   }, [values]);
 
   useEffect(() => {
@@ -100,6 +109,7 @@ export default function Register() {
       <label htmlFor="passwordConfirm">
         Confirm Password
         <input
+          ref={confirmRef}
           type="password"
           name="passwordConfirm"
           value={values.passwordConfirm}

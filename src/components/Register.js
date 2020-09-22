@@ -43,9 +43,6 @@ export default function Register() {
 
   const onChange = e => {
     const { name, value } = e.target;
-    if (name === "passwordConfirm") {
-      validate(name, confirmRef.current.value);
-    }
     validate(name, value);
     setValues({
       ...values,
@@ -69,6 +66,12 @@ export default function Register() {
       })
       .catch(err => console.log(err));
   };
+
+  useEffect(() => {
+    if (confirmRef.current.value === values.password) {
+      setErrors({ ...errors, passwordConfirm: "" });
+    }
+  }, [disabled]);
 
   useEffect(() => {
     schema

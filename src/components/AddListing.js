@@ -27,7 +27,7 @@ export default function AddListing() {
         <select name="category" value={values.category}>
           <option value="">--Select a Category--</option>
           {SAUTI_PRODUCT_CATEGORIES.map(item => {
-            return <option value={item.category}>{item.category}</option>;
+            return <option value={item}>{item}</option>;
           })}
         </select>
       </label>

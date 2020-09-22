@@ -61,9 +61,12 @@ export default function Signin() {
             Authorization: `Basic ${btoa('lambda-client:lambda-secret')}`,
             'Content-Type': 'application/x-www-form-urlencoded'}})
         .then(res => {
-          localStorage.setItem('token', res.data.access_token)})
+          localStorage.setItem('token', res.data.access_token)
+          setValues(initialValues);
+        })
         .catch(err => console.log(err));
   };
+
 
 
   useEffect(() => {

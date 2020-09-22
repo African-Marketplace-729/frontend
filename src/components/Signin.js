@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axiosWithAuth from "../utils/axiosWithAuth";
+import axios from "axios";
 import * as yup from "yup";
 import schema from "../validation/loginSchema";
 
@@ -53,15 +53,15 @@ export default function Signin() {
       password: values.password.trim(),
     }
     
-    axiosWithAuth().post(
-      '/login',
+    axios.post(
+      'https://lambda-agora.herokuapp.com/login',
       `grant_type=password&username=${creds.username}&password=${creds.password}`,
       {headers: {
         // btoa is converting our client id/client secret into base64
             Authorization: `Basic ${btoa('lambda-client:lambda-secret')}`,
             'Content-Type': 'application/x-www-form-urlencoded'}})
         .then(res => {
-          localStorage.setItem('token', res.data.payload)})
+          localStorage.setItem('token', res.data.access_token)})
         .catch(err => console.log(err));
   };
 

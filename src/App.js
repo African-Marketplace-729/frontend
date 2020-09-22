@@ -6,6 +6,7 @@ import Register from './components/Register';
 import Signin from './components/Signin';
 import UserProfile from './components/UserProfile';
 import PriceCheck from './components/PriceCheck';
+import Listings from './components/Listings';
 import './App.css';
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
       {/* But so it's visible, it is here        */}
       <PriceCheck />
       <UserProfile />
-      
+      <Listings />
     </div>
   );
 }

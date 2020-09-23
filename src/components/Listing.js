@@ -1,40 +1,40 @@
 import React, { useState, useEffect } from "react";
 import EditListing from "./EditListing";
 
-export default function Listing({ listings, editListing, beingEdited }) {
+export default function Listing({ listing, editListing, beingEdited }) {
   return (
     <section className="listings-container">
       <h2>Current Listings</h2>
       <article className="listing">
-        {listings.user.fname && listings.user.lname && (
+        {listing.user.fname && listing.user.lname && (
           <article className="listing-info">
             <h4>Listing Provider:</h4>
-            <p>{listings.user.fname + " " + listings.user.lname}</p>
+            <p>{listing.user.fname + " " + listing.user.lname}</p>
           </article>
         )}
         <article className="listing-info">
           <h4>Category:</h4>
-          <p>{listings.category}</p>
+          <p>{listing.category}</p>
         </article>
         <article className="listing-info">
           <h4>Subcategory:</h4>
-          <p>{listings.subcategory}</p>
+          <p>{listing.subcategory}</p>
         </article>
         <article className="listing-info">
           <h4>Product:</h4>
-          <p>{listings.product}</p>
+          <p>{listing.product}</p>
         </article>
         <article className="listing-info">
           <h4>Quantity:</h4>
-          <p>{listings.quantity}</p>
+          <p>{listing.quantity}</p>
         </article>
         <article className="listing-info">
           <h4>Price:</h4>
-          <p>{listings.price}</p>
+          <p>{listing.price}</p>
         </article>
         <button
           onClick={() => {
-            editListing(listings.id);
+            editListing(listing.id);
           }}
         >
           Edit

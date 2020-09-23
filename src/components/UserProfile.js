@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import {connect} from 'react-redux';
 import {fetchUser} from '../redux/actions/fetchUser';
@@ -56,3 +57,4 @@ function mapStateToProps(state){
 }
 
 export default connect((mapStateToProps),{fetchUser})(UserProfile)
+

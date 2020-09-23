@@ -29,7 +29,7 @@ const initialErrors = {
   price: "",
 };
 
-function AddListing(props) {
+function EditListing(props) {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState(initialErrors);
   const [disabled, setDisabled] = useState(true);
@@ -187,5 +187,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { fetchPricing, postListing })(
-  AddListing
+  EditListing
 );

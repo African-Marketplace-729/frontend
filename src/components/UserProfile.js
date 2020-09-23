@@ -31,7 +31,7 @@ useEffect(() => {
                     <h3>Picture: </h3>
                     <h3>Phone Number: {props.data.phonenumber && props.data.phonenumber}</h3>
                     <h3>Email: {props.data.email && props.data.email}</h3>
-                    <h3>Location: {`${props.data.location.city.cityname}, ${props.data.location.city.country.name}`} </h3>
+                    <h3>Location: { props.data.location ? `${props.data.location.city.cityname}, ${props.data.location.city.country.name}` : ''} </h3>
                     {props.data.listings &&
                         <h3>
                             Listings: 

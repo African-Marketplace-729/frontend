@@ -7,6 +7,8 @@ import Signin from './components/Signin';
 import AddListing from './components/AddListing';
 import UserProfile from './components/UserProfile';
 import Listings from './components/Listings';
+import InitialListings from './components/InitialListings';
+
 import './App.css';
 
 function App() {
@@ -17,15 +19,16 @@ function App() {
       <br/><br/><hr/><br/>
       <Switch>
         <PrivateRoute path='/profile' component={UserProfile} />
+        <PrivateRoute path='/pricecheck' component={InitialListings} />
         <Route path='/signin' component={Signin} />
         <Route path='/register' component={Register} />
         <Route path='/' component={Register} />
       </Switch>
       
-      <AddListing />
+      {/* <AddListing />
       <UserProfile />
 
-      <Listings />
+      <Listings /> */}
     </div>
   );
 }

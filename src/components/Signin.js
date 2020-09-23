@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import {useHistory} from 'react-router-dom';
 import * as yup from "yup";
 import schema from "../validation/loginSchema";
 import {connect} from 'react-redux';
@@ -19,6 +19,8 @@ function Signin(props) {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState(initialErrors);
   const [disabled, setDisabled] = useState(true);
+
+  const history = useHistory();
 
   const validate = (name, value) => {
     yup
@@ -57,6 +59,7 @@ function Signin(props) {
     
     props.postSignin(creds);
     setValues(initialValues);
+    history.push('/pricecheck')
   }
 
 

@@ -1,8 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 
-export default function Listing() {
-  const [listings, setListings] = useState([]);
+export default function Listing(listing) {
 
   return (
     <section className="listings-container">

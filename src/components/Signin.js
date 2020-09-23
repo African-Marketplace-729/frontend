@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import {useHistory} from 'react-router-dom';
+import styled from "styled-components";
+import axios from "axios";
 import * as yup from "yup";
 import schema from "../validation/loginSchema";
-import {connect} from 'react-redux';
-import {postSignin} from '../redux/actions/postSignin'
-import {Link} from 'react-router-dom';
+import { connect } from "react-redux";
+import { postSignin } from "../redux/actions/postSignin";
+import { Link } from "react-router-dom";
+import StyledSignIn from "./StyledComponents/StyledSignIn";
+
 const initialValues = {
   username: "",
   password: "",
@@ -55,8 +59,8 @@ function Signin(props) {
     const creds = {
       username: values.username.trim(),
       password: values.password.trim(),
-    }
-    
+    };
+
     props.postSignin(creds);
     setValues(initialValues);
     history.push('/pricecheck')
@@ -71,40 +75,40 @@ function Signin(props) {
 
   return (
     <>
-      <form className="signin-container" onSubmit={onSubmit}>
+      <StyledSignIn onSubmit={onSubmit}>
         <h2>Log In</h2>
-        <label htmlFor="username">
-          Username
+        <article className="form-field">
+          <label htmlFor="username">Username</label>
           <input
             type="text"
             name="username"
             value={values.username}
             onChange={onChange}
           />
-        </label>
-        <label htmlFor="password">
-          Password
+        </article>
+        <article className="form-field">
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             name="password"
             value={values.password}
             onChange={onChange}
           />
-        </label>
-        <article>
+        </article>
+        <article className="btn-container">
           <button disabled={disabled}>Log In</button>
           <p>{errors.username}</p>
           <p>{errors.password}</p>
         </article>
-      </form>
-      <Link to='/register'>Create an account.</Link>
+        <Link to="/register">Create an account.</Link>
+      </StyledSignIn>
     </>
   );
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return {
-    data: state.signinReducer.data
-  }
+    data: state.signinReducer.data,
+  };
 }
-export default connect((mapStateToProps),{postSignin})(Signin)
+export default connect(mapStateToProps, { postSignin })(Signin);

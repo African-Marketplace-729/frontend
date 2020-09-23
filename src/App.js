@@ -4,7 +4,11 @@ import {PrivateRoute} from './utils/PrivateRoute';
 
 import Register from './components/Register';
 import Signin from './components/Signin';
+import AddListing from './components/AddListing';
 import UserProfile from './components/UserProfile';
+import Listings from './components/Listings';
+import InitialListings from './components/InitialListings';
+
 import './App.css';
 
 function App() {
@@ -14,24 +18,17 @@ function App() {
       {/* Delete <br> and <hr> when styling */}
       <br/><br/><hr/><br/>
       <Switch>
+        <PrivateRoute path='/profile' component={UserProfile} />
+        <PrivateRoute path='/pricecheck' component={InitialListings} />
         <Route path='/signin' component={Signin} />
         <Route path='/register' component={Register} />
         <Route path='/' component={Register} />
       </Switch>
       
-      {/* Delete <br> and <hr> when styling.  */}
-
-      {/* Move Links to other components when */}
-      {/* the components are completed.       */}
-
-      <br/><hr/><br/>
-      <Link to='/signin'>Already have an account?</Link>
-      <br/><br/><hr/><br/>
-      <Link to='/register'>Create an account.</Link>
-      <br/><br/><hr/><br/>
-      {/* User Profile will live somewhere else. */}
-      {/* But so it's visible, it is here        */}
+      {/* <AddListing />
       <UserProfile />
+
+      <Listings /> */}
     </div>
   );
 }

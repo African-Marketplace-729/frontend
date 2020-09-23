@@ -6,7 +6,7 @@ const StyledSignIn = styled.form`
   align-items: center;
   justify-content: center;
   max-width: 60%;
-  margin: 0 auto;
+  margin: 1rem auto;
   background-color: #e84c3d;
   padding: 1rem;
   border-radius: 0.2rem;

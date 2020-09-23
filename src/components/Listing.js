@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default function Listing({ listing, editListing, beingEdited }) {
+export default function Listing({ listing }) {
   return (
     <section className="listings-container">
       <h2>Current Listings</h2>
@@ -31,13 +31,6 @@ export default function Listing({ listing, editListing, beingEdited }) {
           <h4>Price:</h4>
           <p>{listing.price}</p>
         </article>
-        <button
-          onClick={() => {
-            editListing(listing.id);
-          }}
-        >
-          Edit
-        </button>
       </article>
     </section>
   );

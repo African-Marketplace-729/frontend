@@ -35,18 +35,28 @@ const StyledSignIn = styled.form`
     }
   }
 
-  button {
-    font-size: 1.2rem;
-    padding: 0.4rem;
-    color: #f3f3f3;
-    background-color: #1d2121;
-    cursor: pointer;
-
-    &:disabled {
+  .btn-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    button {
       font-size: 1.2rem;
       padding: 0.4rem;
-      color: lightgrey;
-      cursor: default;
+      color: #f3f3f3;
+      background-color: #1d2121;
+      cursor: pointer;
+
+      &:disabled {
+        font-size: 1.2rem;
+        padding: 0.4rem;
+        color: lightgrey;
+        cursor: default;
+      }
+    }
+
+    p {
+      color: #f3f3f3;
     }
   }
 

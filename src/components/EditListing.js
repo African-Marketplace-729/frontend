@@ -29,7 +29,7 @@ const initialErrors = {
   price: "",
 };
 
-function AddListing(props) {
+function EditListing(props) {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState(initialErrors);
   const [disabled, setDisabled] = useState(true);
@@ -64,7 +64,6 @@ function AddListing(props) {
   const onSubmit = e => {
     e.preventDefault();
     props.postListing(values);
-    setValues(initialValues);
   };
 
   useEffect(() => {
@@ -148,14 +147,12 @@ function AddListing(props) {
           <div style={{ color: "red" }}>{props.error}</div>
         )}
         {props.data.records &&
-          (props.data.records.reduce((acc, cur) => {
+          props.data.records.reduce((acc, cur) => {
             return acc + cur.retail;
           }, 0) /
-            props.data.records.length).toFixed(2) +
+            props.data.records.length +
             " " +
-            props.data.records[0].currency + " per "
-            + props.data.records[0].unit}
-
+            props.data.records[0].currency}
       </div>
       <label htmlFor="price">
         Price
@@ -190,5 +187,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { fetchPricing, postListing })(
-  AddListing
+  EditListing
 );

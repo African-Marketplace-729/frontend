@@ -6,8 +6,6 @@ export default function Listing(listing) {
   return (
     <section className="listings-container">
       <h2>Current Listings</h2>
-      {listings.map(listing => {
-        return (
           <article className="listings">
             {
                 (listing.user.fname &&  listing.user.lname) &&
@@ -37,8 +35,6 @@ export default function Listing(listing) {
               <p>{listing.price}</p>
             </article>
           </article>
-        );
-      })}
     </section>
   );
 }

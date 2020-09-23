@@ -1,11 +1,12 @@
-
 import React, { useState, useEffect, useRef } from "react";
 
 import axios from "axios";
 
 import * as yup from "yup";
 import schema from "../validation/registerSchema";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
+
+import StyledSignIn from "./StyledComponents/StyledSignIn";
 
 const initialValues = {
   username: "",
@@ -53,26 +54,22 @@ export default function Register() {
     });
   };
 
-
   const onSubmit = e => {
     e.preventDefault();
 
     const newUser = {
       username: values.username.trim(),
       password: values.password.trim(),
+    };
 
-    }
-    
-    axios.post(
-      'https://lambda-agora.herokuapp.com/createnewuser',
-      newUser
-    )
-        .then(res => {
-          localStorage.setItem('token', res.data.access_token);
-          localStorage.setItem('username', newUser.username);
-          setValues(initialValues);
-        })
-        .catch(err => console.log(err));
+    axios
+      .post("https://lambda-agora.herokuapp.com/createnewuser", newUser)
+      .then(res => {
+        localStorage.setItem("token", res.data.access_token);
+        localStorage.setItem("username", newUser.username);
+        setValues(initialValues);
+      })
+      .catch(err => console.log(err));
   };
 
   useEffect(() => {
@@ -94,28 +91,30 @@ export default function Register() {
 
   return (
     <>
-      <form className="register-container" onSubmit={onSubmit}>
+      <StyledSignIn onSubmit={onSubmit}>
         <h2>Sign Up</h2>
-        <label htmlFor="username">
-          Username
+        <article className="form-field">
+          <label htmlFor="username">Username</label>
           <input
             type="text"
             name="username"
             value={values.username}
             onChange={onChange}
           />
-        </label>
-        <label htmlFor="password">
-          Password
+        </article>
+
+        <article className="form-field">
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             name="password"
             value={values.password}
             onChange={onChange}
           />
-        </label>
-        <label htmlFor="passwordConfirm">
-          Confirm Password
+        </article>
+
+        <article className="form-field">
+          <label htmlFor="passwordConfirm">Confirm Password</label>
           <input
             ref={confirmRef}
             type="password"
@@ -123,15 +122,16 @@ export default function Register() {
             value={values.passwordConfirm}
             onChange={onChange}
           />
-        </label>
-        <article>
+        </article>
+
+        <article className="btn-container">
           <button disabled={disabled}>Register</button>
           <p>{errors.username}</p>
           <p>{errors.password}</p>
           <p>{errors.passwordConfirm}</p>
         </article>
-      </form>
-      <Link to='/signin'>Already have an account?</Link>
+        <Link to="/signin">Already have an account?</Link>
+      </StyledSignIn>
     </>
   );
 }

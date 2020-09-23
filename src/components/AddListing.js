@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import {fetchPricing} from '../redux/actions/fetchPricing'
+import {postListing} from '../redux/actions/postListing';
+import {connect} from 'react-redux';
+
 import {
   SAUTI_PRODUCT_CATEGORIES,
   SAUTI_PRODUCT_SUBCATEGORIES,
@@ -25,7 +29,7 @@ const initialErrors = {
   price: "",
 };
 
-export default function AddListing() {
+function AddListing(props) {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState(initialErrors);
   const [disabled, setDisabled] = useState(true);
@@ -59,6 +63,7 @@ export default function AddListing() {
 
   const onSubmit = e => {
     e.preventDefault();
+    props.postListing(values);
   };
 
   useEffect(() => {
@@ -66,6 +71,10 @@ export default function AddListing() {
       setDisabled(!valid);
     });
   }, [values]);
+
+  useEffect(() => {
+    props.fetchPricing(values.product)
+  }, [values.product])
 
   return (
     <form onSubmit={onSubmit}>
@@ -131,6 +140,15 @@ export default function AddListing() {
           name="quantity"
         />
       </label>
+      <div>
+        Average Price: 
+        {props.isFetching && "Loading..."}
+        {(props.error && values.product) && <div style={{color: 'red'}}>{props.error}</div> }
+        {props.data.records && props.data.records.reduce((acc, cur) => {
+          return (acc + cur.retail);
+        }, 0) / props.data.records.length + ' ' + props.data.records[0].currency}
+        
+      </div>
       <label htmlFor="price">
         Price
         <input
@@ -151,3 +169,16 @@ export default function AddListing() {
     </form>
   );
 }
+
+function mapStateToProps(state){
+  return {
+    data: state.pricingReducer.data,
+    isFetching: state.pricingReducer.isFetching,
+    error: state.pricingReducer.error,
+    postData: state.listingsReducer.postData,
+    isPosting: state.listingsReducer.isPosting,
+    postError: state.listingsReducer.postError
+  }
+}
+
+export default connect((mapStateToProps), {fetchPricing, postListing})(AddListing)

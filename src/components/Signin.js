@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axiosWithAuth from "../utils/axiosWithAuth";
+import axios from "axios";
 import * as yup from "yup";
 import schema from "../validation/loginSchema";
-
+import {connect} from 'react-redux';
+import {postSignin} from '../redux/actions/postSignin'
+import {Link} from 'react-router-dom';
 const initialValues = {
   username: "",
   password: "",
@@ -13,7 +15,7 @@ const initialErrors = {
   password: "",
 };
 
-export default function Signin() {
+function Signin(props) {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState(initialErrors);
   const [disabled, setDisabled] = useState(true);
@@ -53,17 +55,9 @@ export default function Signin() {
       password: values.password.trim(),
     }
     
-    axiosWithAuth().post(
-      '/login',
-      `grant_type=password&username=${creds.username}&password=${creds.password}`,
-      {headers: {
-        // btoa is converting our client id/client secret into base64
-            Authorization: `Basic ${btoa('lambda-client:lambda-secret')}`,
-            'Content-Type': 'application/x-www-form-urlencoded'}})
-        .then(res => {
-          localStorage.setItem('token', res.data.payload)})
-        .catch(err => console.log(err));
-  };
+    props.postSignin(creds);
+    setValues(initialValues);
+  }
 
 
   useEffect(() => {
@@ -73,31 +67,41 @@ export default function Signin() {
   }, [values]);
 
   return (
-    <form className="signin-container" onSubmit={onSubmit}>
-      <h2>Log In</h2>
-      <label htmlFor="username">
-        Username
-        <input
-          type="text"
-          name="username"
-          value={values.username}
-          onChange={onChange}
-        />
-      </label>
-      <label htmlFor="password">
-        Password
-        <input
-          type="password"
-          name="password"
-          value={values.password}
-          onChange={onChange}
-        />
-      </label>
-      <article>
-        <button disabled={disabled}>Log In</button>
-        <p>{errors.username}</p>
-        <p>{errors.password}</p>
-      </article>
-    </form>
+    <>
+      <form className="signin-container" onSubmit={onSubmit}>
+        <h2>Log In</h2>
+        <label htmlFor="username">
+          Username
+          <input
+            type="text"
+            name="username"
+            value={values.username}
+            onChange={onChange}
+          />
+        </label>
+        <label htmlFor="password">
+          Password
+          <input
+            type="password"
+            name="password"
+            value={values.password}
+            onChange={onChange}
+          />
+        </label>
+        <article>
+          <button disabled={disabled}>Log In</button>
+          <p>{errors.username}</p>
+          <p>{errors.password}</p>
+        </article>
+      </form>
+      <Link to='/register'>Create an account.</Link>
+    </>
   );
 }
+
+function mapStateToProps(state){
+  return {
+    data: state.signinReducer.data
+  }
+}
+export default connect((mapStateToProps),{postSignin})(Signin)

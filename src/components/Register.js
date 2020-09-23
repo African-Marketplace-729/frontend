@@ -1,11 +1,11 @@
 
 import React, { useState, useEffect, useRef } from "react";
 
-import axiosWithAuth from "../utils/axiosWithAuth";
+import axios from "axios";
 
 import * as yup from "yup";
 import schema from "../validation/registerSchema";
-
+import {Link} from 'react-router-dom';
 
 const initialValues = {
   username: "",
@@ -63,17 +63,16 @@ export default function Register() {
 
     }
     
-    axiosWithAuth().post(
-      '/login',
-      `grant_type=password&username=${newUser.username}&password=${newUser.password}`,
-      {headers: {
-        // btoa is converting our client id/client secret into base64
-            Authorization: `Basic ${btoa('lambda-client:lambda-secret')}`,
-            'Content-Type': 'application/x-www-form-urlencoded'}})
+    axios.post(
+      'https://lambda-agora.herokuapp.com/createnewuser',
+      newUser
+    )
         .then(res => {
-          localStorage.setItem('token', res.data.payload)})
+          localStorage.setItem('token', res.data.access_token);
+          localStorage.setItem('username', newUser.username);
+          setValues(initialValues);
+        })
         .catch(err => console.log(err));
-
   };
 
   useEffect(() => {
@@ -94,42 +93,45 @@ export default function Register() {
   }, [values]);
 
   return (
-    <form className="register-container" onSubmit={onSubmit}>
-      <h2>Sign Up</h2>
-      <label htmlFor="username">
-        Username
-        <input
-          type="text"
-          name="username"
-          value={values.username}
-          onChange={onChange}
-        />
-      </label>
-      <label htmlFor="password">
-        Password
-        <input
-          type="password"
-          name="password"
-          value={values.password}
-          onChange={onChange}
-        />
-      </label>
-      <label htmlFor="passwordConfirm">
-        Confirm Password
-        <input
-          ref={confirmRef}
-          type="password"
-          name="passwordConfirm"
-          value={values.passwordConfirm}
-          onChange={onChange}
-        />
-      </label>
-      <article>
-        <button disabled={disabled}>Register</button>
-        <p>{errors.username}</p>
-        <p>{errors.password}</p>
-        <p>{errors.passwordConfirm}</p>
-      </article>
-    </form>
+    <>
+      <form className="register-container" onSubmit={onSubmit}>
+        <h2>Sign Up</h2>
+        <label htmlFor="username">
+          Username
+          <input
+            type="text"
+            name="username"
+            value={values.username}
+            onChange={onChange}
+          />
+        </label>
+        <label htmlFor="password">
+          Password
+          <input
+            type="password"
+            name="password"
+            value={values.password}
+            onChange={onChange}
+          />
+        </label>
+        <label htmlFor="passwordConfirm">
+          Confirm Password
+          <input
+            ref={confirmRef}
+            type="password"
+            name="passwordConfirm"
+            value={values.passwordConfirm}
+            onChange={onChange}
+          />
+        </label>
+        <article>
+          <button disabled={disabled}>Register</button>
+          <p>{errors.username}</p>
+          <p>{errors.password}</p>
+          <p>{errors.passwordConfirm}</p>
+        </article>
+      </form>
+      <Link to='/signin'>Already have an account?</Link>
+    </>
   );
 }

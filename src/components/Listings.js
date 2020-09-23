@@ -21,9 +21,7 @@ const {isFetching, data, error, fetchListings} = props;
 
     return (
         <div className='listings-container'>
-            {
-                data.map(listing => <Listing key={`listing-${listing.id}`} {...listing} />)
-            }
+            {data.map(listing => <Listing key={`listing-${listing.id}`} {...listing} />)}
         </div>
         )
 }

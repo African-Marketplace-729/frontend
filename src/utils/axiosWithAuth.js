@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default function AxiosWithAuth(){
+export default function axiosWithAuth(){
     const token = localStorage.getItem('token');
     return axios.create({
         baseURL: 'https://lambda-agora.herokuapp.com/',

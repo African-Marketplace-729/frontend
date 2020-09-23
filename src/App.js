@@ -16,25 +16,12 @@ function App() {
       {/* Delete <br> and <hr> when styling */}
       <br/><br/><hr/><br/>
       <Switch>
+        <PrivateRoute path='/profile' component={UserProfile} />
         <Route path='/signin' component={Signin} />
         <Route path='/register' component={Register} />
         <Route path='/' component={Register} />
       </Switch>
       
-      {/* Delete <br> and <hr> when styling.  */}
-
-      {/* Move Links to other components when */}
-      {/* the components are completed.       */}
-
-      <br/><hr/><br/>
-      <Link to='/signin'>Already have an account?</Link>
-      <br/><br/><hr/><br/>
-      <Link to='/register'>Create an account.</Link>
-      <br/><br/><hr/><br/>
-
-      {/* User Profile will live somewhere else. */}
-      {/* But so it's visible, it is here        */}
-      {/* <PriceCheck /> */}
       <AddListing />
       <UserProfile />
 

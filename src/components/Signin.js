@@ -4,7 +4,7 @@ import * as yup from "yup";
 import schema from "../validation/loginSchema";
 import {connect} from 'react-redux';
 import {postSignin} from '../redux/actions/postSignin'
-
+import {Link} from 'react-router-dom';
 const initialValues = {
   username: "",
   password: "",
@@ -67,32 +67,35 @@ function Signin(props) {
   }, [values]);
 
   return (
-    <form className="signin-container" onSubmit={onSubmit}>
-      <h2>Log In</h2>
-      <label htmlFor="username">
-        Username
-        <input
-          type="text"
-          name="username"
-          value={values.username}
-          onChange={onChange}
-        />
-      </label>
-      <label htmlFor="password">
-        Password
-        <input
-          type="password"
-          name="password"
-          value={values.password}
-          onChange={onChange}
-        />
-      </label>
-      <article>
-        <button disabled={disabled}>Log In</button>
-        <p>{errors.username}</p>
-        <p>{errors.password}</p>
-      </article>
-    </form>
+    <>
+      <form className="signin-container" onSubmit={onSubmit}>
+        <h2>Log In</h2>
+        <label htmlFor="username">
+          Username
+          <input
+            type="text"
+            name="username"
+            value={values.username}
+            onChange={onChange}
+          />
+        </label>
+        <label htmlFor="password">
+          Password
+          <input
+            type="password"
+            name="password"
+            value={values.password}
+            onChange={onChange}
+          />
+        </label>
+        <article>
+          <button disabled={disabled}>Log In</button>
+          <p>{errors.username}</p>
+          <p>{errors.password}</p>
+        </article>
+      </form>
+      <Link to='/register'>Create an account.</Link>
+    </>
   );
 }
 

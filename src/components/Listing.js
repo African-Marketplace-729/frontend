@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import EditListing from "./EditListing";
 
 export default function Listing({ listing, editListing, beingEdited }) {
   return (

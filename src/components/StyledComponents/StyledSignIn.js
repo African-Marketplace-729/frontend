@@ -10,6 +10,8 @@ const StyledSignIn = styled.form`
   background-color: #e84c3d;
   padding: 1rem;
   border-radius: 0.2rem;
+  color: #1d2121;
+  box-shadow: 2px 2px rgb(29, 33, 33, 0.5);
 
   h2 {
     font-size: 2.4rem;
@@ -50,7 +52,7 @@ const StyledSignIn = styled.form`
       &:disabled {
         font-size: 1.2rem;
         padding: 0.4rem;
-        color: lightgrey;
+        color: darkgrey;
         cursor: default;
       }
     }

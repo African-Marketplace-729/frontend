@@ -127,7 +127,7 @@ function AddListing(props) {
       <article className="input-container">
         <label htmlFor="product">Product</label>
         <select name="product" value={values.product} onChange={onChange}>
-          <option value="">--Select a Product</option>
+          <option value="">--Select a Product--</option>
           {SAUTI_PRODUCTS.map(item => {
             if (
               item.category === values.category &&
@@ -176,15 +176,16 @@ function AddListing(props) {
           onChange={onChange}
         />
       </article>
-
-      <button disabled={disabled}>Add</button>
-      {errors.name ? <p>{errors.name}</p> : null}
-      {errors.description ? <p>{errors.description}</p> : null}
-      {errors.category ? <p>{errors.category}</p> : null}
-      {errors.subcategory ? <p>{errors.subcategory}</p> : null}
-      {errors.product ? <p>{errors.product}</p> : null}
-      {errors.quantity ? <p>{errors.quantity}</p> : null}
-      {errors.price ? <p>{errors.price}</p> : null}
+      <article className="btn-container">
+        <button disabled={disabled}>Add</button>
+        {errors.name ? <p>{errors.name}</p> : null}
+        {errors.description ? <p>{errors.description}</p> : null}
+        {errors.category ? <p>{errors.category}</p> : null}
+        {errors.subcategory ? <p>{errors.subcategory}</p> : null}
+        {errors.product ? <p>{errors.product}</p> : null}
+        {errors.quantity ? <p>{errors.quantity}</p> : null}
+        {errors.price ? <p>{errors.price}</p> : null}
+      </article>
     </StyledAddEdit>
   );
 }

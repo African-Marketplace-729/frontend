@@ -80,7 +80,7 @@ function AddListing(props) {
 
   return (
     <StyledAddEdit onSubmit={onSubmit}>
-      <h2>Add a Listing</h2>
+      <h2>Edit Listing</h2>
 
       <article className="input-container">
         <label htmlFor="name">Listing Name</label>
@@ -177,14 +177,16 @@ function AddListing(props) {
         />
       </article>
 
-      <button disabled={disabled}>Add</button>
-      {errors.name ? <p>{errors.name}</p> : null}
-      {errors.description ? <p>{errors.description}</p> : null}
-      {errors.category ? <p>{errors.category}</p> : null}
-      {errors.subcategory ? <p>{errors.subcategory}</p> : null}
-      {errors.product ? <p>{errors.product}</p> : null}
-      {errors.quantity ? <p>{errors.quantity}</p> : null}
-      {errors.price ? <p>{errors.price}</p> : null}
+      <article className="btn-container">
+        <button disabled={disabled}>Add</button>
+        {errors.name ? <p>{errors.name}</p> : null}
+        {errors.description ? <p>{errors.description}</p> : null}
+        {errors.category ? <p>{errors.category}</p> : null}
+        {errors.subcategory ? <p>{errors.subcategory}</p> : null}
+        {errors.product ? <p>{errors.product}</p> : null}
+        {errors.quantity ? <p>{errors.quantity}</p> : null}
+        {errors.price ? <p>{errors.price}</p> : null}
+      </article>
     </StyledAddEdit>
   );
 }

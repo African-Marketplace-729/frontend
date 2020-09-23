@@ -64,6 +64,7 @@ function AddListing(props) {
   const onSubmit = e => {
     e.preventDefault();
     props.postListing(values);
+    setValues(initialValues);
   };
 
   useEffect(() => {
@@ -147,12 +148,14 @@ function AddListing(props) {
           <div style={{ color: "red" }}>{props.error}</div>
         )}
         {props.data.records &&
-          props.data.records.reduce((acc, cur) => {
+          (props.data.records.reduce((acc, cur) => {
             return acc + cur.retail;
           }, 0) /
-            props.data.records.length +
+            props.data.records.length).toFixed(2) +
             " " +
-            props.data.records[0].currency}
+            props.data.records[0].currency + " per "
+            + props.data.records[0].unit}
+
       </div>
       <label htmlFor="price">
         Price

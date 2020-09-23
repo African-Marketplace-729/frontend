@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as yup from "yup";
 import schema from "../validation/loginSchema";
+import {connect} from 'react-redux';
+import {postSignin} from '../redux/actions/postSignin'
 
 const initialValues = {
   username: "",
@@ -13,7 +15,7 @@ const initialErrors = {
   password: "",
 };
 
-export default function Signin() {
+function Signin(props) {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState(initialErrors);
   const [disabled, setDisabled] = useState(true);
@@ -53,20 +55,9 @@ export default function Signin() {
       password: values.password.trim(),
     }
     
-    axios.post(
-      'https://lambda-agora.herokuapp.com/login',
-      `grant_type=password&username=${creds.username}&password=${creds.password}`,
-      {headers: {
-        // btoa is converting our client id/client secret into base64
-            Authorization: `Basic ${btoa('lambda-client:lambda-secret')}`,
-            'Content-Type': 'application/x-www-form-urlencoded'}})
-        .then(res => {
-          localStorage.setItem('token', res.data.access_token)
-          setValues(initialValues);
-        })
-        .catch(err => console.log(err));
-  };
-
+    props.postSignin(creds);
+    setValues(initialValues);
+  }
 
 
   useEffect(() => {
@@ -104,3 +95,10 @@ export default function Signin() {
     </form>
   );
 }
+
+function mapStateToProps(state){
+  return {
+    data: state.signinReducer.data
+  }
+}
+export default connect((mapStateToProps),{postSignin})(Signin)

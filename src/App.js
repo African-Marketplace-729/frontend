@@ -34,10 +34,10 @@ function App() {
 
       {/* User Profile will live somewhere else. */}
       {/* But so it's visible, it is here        */}
-      <PriceCheck />
+      {/* <PriceCheck /> */}
       <AddListing />
       <UserProfile />
-      <AddListing />
+
       <Listings />
     </div>
   );

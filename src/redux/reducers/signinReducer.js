@@ -1,28 +1,29 @@
 import {
-    FETCH_USER_START,
-    FETCH_USER_SUCCESS,
-    FETCH_USER_ERROR
-} from '../actions/fetchUser'
+    POST_SIGNIN_START,
+    POST_SIGNIN_SUCCESS,
+    POST_SIGNIN_ERROR
+} from '../actions/postSignin'
 
 const initialState = {
+    data: {},
     isFetching: false,
     error: ''
 }
 export function reducer (state = initialState, action){
     switch(action.type){
-        case FETCH_USER_START:
+        case POST_SIGNIN_START:
             return {
-                data: [],
+                data: {},
                 isFetching: true,
                 error: ''
             }
-        case FETCH_USER_SUCCESS:
+        case POST_SIGNIN_SUCCESS:
             return {
-                data: action.payload,
+                data: {username: action.payload},
                 isFetching: false,
                 error: ''
             }
-        case FETCH_USER_ERROR:
+        case POST_SIGNIN_ERROR:
             return {
                 data: [],
                 isFetching: false,

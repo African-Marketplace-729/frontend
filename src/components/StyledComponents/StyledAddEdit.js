@@ -61,6 +61,9 @@ const StyledAddEdit = styled.form`
         cursor: default;
       }
     }
+    p {
+      color: #f3f3f3;
+    }
   }
 
   div {

@@ -61,6 +61,10 @@ const StyledSignIn = styled.form`
     }
   }
 
+  @media (max-width: 800px) {
+    min-width: 80%;
+  }
+
   @media (max-width: 550px) {
     min-width: 100%;
 

@@ -27,6 +27,7 @@ function App() {
         <PrivateRoute path="/listings" component={Listings} />
         <PrivateRoute path="/addlisting" component={AddListing} />
         <PrivateRoute path="/confirm" component={ConfirmPassword} />
+        <PrivateRoute path="/createprofile" component={UserProfileCreation} />
         <Route path="/signin" component={Signin} />
         <Route path="/register" component={Register} />
         <Route path="/" component={Register} />

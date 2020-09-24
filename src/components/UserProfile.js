@@ -5,14 +5,20 @@ import {fetchUser} from '../redux/actions/fetchUser';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import ProfileListing from './ProfileListing';
 import {useHistory} from 'react-router-dom';
+import ProfileEditListing from './ProfileEditListing';
 
 function UserProfile(props){
+ let [beingEdited, setBeingEdited] = useState('');
 
 const history = useHistory();
 
 useEffect(() => {
         props.fetchUser(localStorage.getItem('username'));
 }, [])
+
+// useEffect(() => {
+//     props.fetchUser(localStorage.getItem('username'));
+//   },[beingEdited])
 
 function onClick (event) {
     history.push('/confirm');
@@ -30,8 +36,8 @@ function onClick (event) {
                 <h1> User Profile Goes Here</h1>
                 <div>
                     <h3>
-                        Name: 
-                        {props.data.fname !== null ? props.data.fname : ''}
+                        {'Name: '} 
+                        {props.data.fname !== null ? props.data.fname + " ": ''}
                         {props.data.lname !== null ? props.data.lname : ''}
                     </h3>
                     <h3>Picture: </h3>
@@ -42,7 +48,18 @@ function onClick (event) {
                         <h3>
                             Listings: 
                                 {props.data.listings.map(listing => {
-                                    return <ProfileListing key={listing.listingid} {...listing} />
+                                    if (beingEdited === listing.listingid){
+                                        return <ProfileEditListing listing={listing} setBeingEdited={setBeingEdited} fetchUser={props.fetchUser}/>
+                                    } else {
+                                        return (
+                                            <ProfileListing
+                                                key={listing.listingid}
+                                                listing={listing}
+                                                beingEdited={beingEdited}
+                                                setBeingEdited={setBeingEdited}
+                                            />
+                                        )
+                                    }
                                 })}
                         </h3>
                     }

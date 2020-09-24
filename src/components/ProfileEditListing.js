@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchPricing } from "../redux/actions/fetchPricing";
-import { postListing } from "../redux/actions/postListing";
+import { putListing } from "../redux/actions/putListing";
+import { fetchListings} from '../redux/actions/fetchListings';
 import { connect } from "react-redux";
 
 import {
@@ -11,16 +12,6 @@ import {
 import * as yup from "yup";
 import schema from "../validation/addListingSchema";
 
-const initialValues = {
-  name: "",
-  description: "",
-  category: "",
-  subcategory: "",
-  product: "",
-  quantity: "",
-  price: "",
-};
-
 const initialErrors = {
   name: "",
   description: "",
@@ -30,8 +21,8 @@ const initialErrors = {
   price: "",
 };
 
-function EditListing(props, data) {
-  const [values, setValues] = useState(initialValues);
+function EditListing(props) {
+  const [values, setValues] = useState(props.listing);
   const [errors, setErrors] = useState(initialErrors);
   const [disabled, setDisabled] = useState(true);
 
@@ -64,14 +55,19 @@ function EditListing(props, data) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    props.postListing(values);
+    props.putListing(values);
+    props.fetchUser(localStorage.getItem('username'));
+    props.setBeingEdited('');
   };
 
   useEffect(() => {
+    let {category, subcategory, product, ...rest} = values;
     schema.isValid(values).then((valid) => {
       setDisabled(!valid);
     });
   }, [values]);
+
+
 
   useEffect(() => {
     props.fetchPricing(values.product);
@@ -80,14 +76,17 @@ function EditListing(props, data) {
   return (
     <form onSubmit={onSubmit}>
       <h2>Add a Listing</h2>
-      <label htmlFor="name">
+      <label htmlFor="listingname">
         Listing Name
-        <input type="text" name="name" onChange={onChange} />
+        <input 
+          type="text" 
+          name="listingname" 
+          onChange={onChange}
+          value={values.listingname} />
       </label>
       <label htmlFor="description">
         Description
         <textarea
-          defaultValue="Please enter "
           name="description"
           value={values.description}
           onChange={onChange}
@@ -160,12 +159,12 @@ function EditListing(props, data) {
         Price
         <input
           type="number"
-          values={values.number}
+          value={values.price}
           name="price"
           onChange={onChange}
         />
       </label>
-      <button disabled={disabled}>Add</button>
+      <button disabled={disabled}>Edit Listing</button>
       <p>{errors.name}</p>
       <p>{errors.description}</p>
       <p>{errors.category}</p>
@@ -188,6 +187,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchPricing, postListing })(
+export default connect(mapStateToProps, { fetchPricing, fetchListings, putListing })(
   EditListing
 );

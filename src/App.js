@@ -10,6 +10,7 @@ import UserProfile from './components/UserProfile';
 import Listings from './components/Listings';
 import InitialListings from './components/InitialListings';
 import UserProfileCreation from './components/UserProfileCreation';
+import ConfirmPassword from './components/ConfirmPassword';
 
 function App() {
   return (

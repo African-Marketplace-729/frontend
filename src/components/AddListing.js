@@ -84,17 +84,19 @@ function AddListing(props) {
     <StyledAddEdit onSubmit={onSubmit}>
       <h2>Add a Listing</h2>
 
-      <label htmlFor="listingname">
-        Listing Name
-        <input type="text" name="listingname" onChange={onChange} />
-      </label>
-      <label htmlFor="description">
-        Description
-        <textarea
-          name="description"
-          value={values.description}
-          onChange={onChange}
-        />
+      <article className="input-container">
+        <label htmlFor="listingname">
+          Listing Name
+          <input type="text" name="listingname" onChange={onChange} />
+        </label>
+        <label htmlFor="description">
+          Description
+          <textarea
+            name="description"
+            value={values.description}
+            onChange={onChange}
+          />
+        </label>
       </article>
 
       <article className="input-container">

@@ -63,7 +63,9 @@ function AddListing(props) {
 
   const onSubmit = e => {
     e.preventDefault();
-    props.postListing(values);
+    let {category, subcategory, product, ...sentValues} = values
+    sentValues = {...sentValues, imageurl: ''}
+    props.postListing(sentValues);
     setValues(initialValues);
   };
 
@@ -80,9 +82,9 @@ function AddListing(props) {
   return (
     <form onSubmit={onSubmit}>
       <h2>Add a Listing</h2>
-      <label htmlFor="name">
+      <label htmlFor="listingname">
         Listing Name
-        <input type="text" name="name" onChange={onChange} />
+        <input type="text" name="listingname" onChange={onChange} />
       </label>
       <label htmlFor="description">
         Description

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default function Listing({ listing, editListing, beingEdited }) {
+export default function Listing({ listing, editListing, data }) {
   return (
     <section className="listings-container">
       <h2>Current Listings</h2>

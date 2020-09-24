@@ -17,8 +17,8 @@ const initialValues = {
   category: "",
   subcategory: "",
   product: "",
-  quantity: 0,
-  price: 0,
+  quantity: "",
+  price: "",
 };
 
 const initialErrors = {

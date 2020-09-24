@@ -17,6 +17,7 @@ const initialValues = {
   description: "",
   category: "",
   subcategory: "",
+  product: "",
   quantity: 0,
   price: 0,
 };
@@ -30,6 +31,7 @@ const initialErrors = {
   price: "",
 };
 
+
 function AddListing(props) {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState(initialErrors);
@@ -39,13 +41,13 @@ function AddListing(props) {
     yup
       .reach(schema, name)
       .validate(value)
-      .then(valid => {
+      .then((valid) => {
         setErrors({
           ...errors,
           [name]: "",
         });
       })
-      .catch(err => {
+      .catch((err) => {
         setErrors({
           ...errors,
           [name]: err.errors[0],
@@ -53,7 +55,7 @@ function AddListing(props) {
       });
   };
 
-  const onChange = e => {
+  const onChange = (e) => {
     const { name, value } = e.target;
     validate(name, value);
     setValues({
@@ -62,14 +64,14 @@ function AddListing(props) {
     });
   };
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     props.postListing(values);
     setValues(initialValues);
   };
 
   useEffect(() => {
-    schema.isValid(values).then(valid => {
+    schema.isValid(values).then((valid) => {
       setDisabled(!valid);
     });
   }, [values]);
@@ -90,6 +92,7 @@ function AddListing(props) {
       <article className="input-container">
         <label htmlFor="description">Description</label>
         <textarea
+          defaultValue="Please enter "
           name="description"
           value={values.description}
           onChange={onChange}
@@ -100,7 +103,7 @@ function AddListing(props) {
         <label htmlFor="category">Category</label>
         <select name="category" value={values.category} onChange={onChange}>
           <option value="">--Select a Category--</option>
-          {SAUTI_PRODUCT_CATEGORIES.map(item => {
+          {SAUTI_PRODUCT_CATEGORIES.map((item) => {
             return <option value={item}>{item}</option>;
           })}
         </select>
@@ -114,7 +117,7 @@ function AddListing(props) {
           onChange={onChange}
         >
           <option value="">--Select a Subcategory--</option>
-          {SAUTI_PRODUCT_SUBCATEGORIES.map(item => {
+          {SAUTI_PRODUCT_SUBCATEGORIES.map((item) => {
             if (item.category === values.category)
               return (
                 <option value={item.subcategory}>{item.subcategory}</option>
@@ -128,7 +131,7 @@ function AddListing(props) {
         <label htmlFor="product">Product</label>
         <select name="product" value={values.product} onChange={onChange}>
           <option value="">--Select a Product</option>
-          {SAUTI_PRODUCTS.map(item => {
+          {SAUTI_PRODUCTS.map((item) => {
             if (
               item.category === values.category &&
               item.subcategory === values.subcategory

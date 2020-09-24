@@ -4,7 +4,7 @@ import {SAUTI_PRODUCTS, SAUTI_PRODUCT_CATEGORIES, SAUTI_PRODUCT_SUBCATEGORIES} f
 import {fetchPricing} from '../redux/actions/fetchPricing';
 
 
-function PriceCheck ({data, isFetching, error, fetchPricing}){
+function PriceCheck ({fetchPricing}){
     let [product, setProduct] = useState({});
 
 

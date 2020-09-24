@@ -1,17 +1,22 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {connect} from 'react-redux';
 import {fetchUser} from '../redux/actions/fetchUser';
+import axiosWithAuth from '../utils/axiosWithAuth';
 import ProfileListing from './ProfileListing';
+import {useHistory} from 'react-router-dom';
 
 function UserProfile(props){
-    // let {fname, lname, phonenumber, email, location, listings} = props.data
 
-// console.log(location, listings)
+const history = useHistory();
+
 useEffect(() => {
-    props.fetchUser(localStorage.getItem('username'));
+        props.fetchUser(localStorage.getItem('username'));
 }, [])
 
+function onClick (event) {
+    history.push('/confirm');
+}
     if (props.isFetching){
         return <div>Loading</div>
     }
@@ -42,6 +47,7 @@ useEffect(() => {
                         </h3>
                     }
                 </div>
+                <button onClick={onClick}>Become a Vendor</button>   
             </div> 
         ) : null)
     

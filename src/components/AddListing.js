@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { fetchPricing } from "../redux/actions/fetchPricing";
 import { postListing } from "../redux/actions/postListing";
 import { connect } from "react-redux";
+import StyledAddEdit from "./StyledComponents/StyledAddEdit";
 
 import {
   SAUTI_PRODUCT_CATEGORIES,
@@ -63,7 +64,9 @@ function AddListing(props) {
 
   const onSubmit = e => {
     e.preventDefault();
-    props.postListing(values);
+    let {category, subcategory, product, ...sentValues} = values
+    sentValues = {...sentValues, imageurl: ''}
+    props.postListing(sentValues);
     setValues(initialValues);
   };
 
@@ -78,31 +81,36 @@ function AddListing(props) {
   }, [values.product]);
 
   return (
-    <form onSubmit={onSubmit}>
+    <StyledAddEdit onSubmit={onSubmit}>
       <h2>Add a Listing</h2>
-      <label htmlFor="name">
-        Listing Name
-        <input type="text" name="name" onChange={onChange} />
-      </label>
-      <label htmlFor="description">
-        Description
-        <textarea
-          name="description"
-          value={values.description}
-          onChange={onChange}
-        />
-      </label>
-      <label htmlFor="category">
-        Category
+
+      <article className="input-container">
+        <label htmlFor="listingname">
+          Listing Name
+          <input type="text" name="listingname" onChange={onChange} />
+        </label>
+        <label htmlFor="description">
+          Description
+          <textarea
+            name="description"
+            value={values.description}
+            onChange={onChange}
+          />
+        </label>
+      </article>
+
+      <article className="input-container">
+        <label htmlFor="category">Category</label>
         <select name="category" value={values.category} onChange={onChange}>
           <option value="">--Select a Category--</option>
           {SAUTI_PRODUCT_CATEGORIES.map(item => {
             return <option value={item}>{item}</option>;
           })}
         </select>
-      </label>
-      <label htmlFor="subcategory">
-        Subcategory
+      </article>
+
+      <article className="input-container">
+        <label htmlFor="subcategory">Subcategory</label>
         <select
           name="subcategory"
           value={values.subcategory}
@@ -117,11 +125,12 @@ function AddListing(props) {
             return null;
           })}
         </select>
-      </label>
-      <label htmlFor="product">
-        Product
+      </article>
+
+      <article className="input-container">
+        <label htmlFor="product">Product</label>
         <select name="product" value={values.product} onChange={onChange}>
-          <option value="">--Select a Product</option>
+          <option value="">--Select a Product--</option>
           {SAUTI_PRODUCTS.map(item => {
             if (
               item.category === values.category &&
@@ -131,16 +140,18 @@ function AddListing(props) {
             return null;
           })}
         </select>
-      </label>
-      <label htmlFor="quantity">
-        Quantity
+      </article>
+
+      <article className="input-container">
+        <label htmlFor="quantity">Quantity</label>
         <input
           type="number"
           value={values.quantity}
           onChange={onChange}
           name="quantity"
         />
-      </label>
+      </article>
+
       <div>
         Average Price:
         {props.isFetching && "Loading..."}
@@ -148,33 +159,37 @@ function AddListing(props) {
           <div style={{ color: "red" }}>{props.error}</div>
         )}
         {props.data.records &&
-          (props.data.records.reduce((acc, cur) => {
-            return acc + cur.retail;
-          }, 0) /
-            props.data.records.length).toFixed(2) +
+          (
+            props.data.records.reduce((acc, cur) => {
+              return acc + cur.retail;
+            }, 0) / props.data.records.length
+          ).toFixed(2) +
             " " +
-            props.data.records[0].currency + " per "
-            + props.data.records[0].unit}
-
+            props.data.records[0].currency +
+            " per " +
+            props.data.records[0].unit}
       </div>
-      <label htmlFor="price">
-        Price
+
+      <article className="input-container">
+        <label htmlFor="price">Price</label>
         <input
           type="number"
           values={values.number}
           name="price"
           onChange={onChange}
         />
-      </label>
-      <button disabled={disabled}>Add</button>
-      <p>{errors.name}</p>
-      <p>{errors.description}</p>
-      <p>{errors.category}</p>
-      <p>{errors.subcategory}</p>
-      <p>{errors.product}</p>
-      <p>{errors.quantity}</p>
-      <p>{errors.price}</p>
-    </form>
+      </article>
+      <article className="btn-container">
+        <button disabled={disabled}>Add</button>
+        {errors.name ? <p>{errors.name}</p> : null}
+        {errors.description ? <p>{errors.description}</p> : null}
+        {errors.category ? <p>{errors.category}</p> : null}
+        {errors.subcategory ? <p>{errors.subcategory}</p> : null}
+        {errors.product ? <p>{errors.product}</p> : null}
+        {errors.quantity ? <p>{errors.quantity}</p> : null}
+        {errors.price ? <p>{errors.price}</p> : null}
+      </article>
+    </StyledAddEdit>
   );
 }
 

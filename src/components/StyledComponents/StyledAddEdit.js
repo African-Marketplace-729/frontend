@@ -1,23 +1,23 @@
 import styled from "styled-components";
 
-const StyledSignIn = styled.form`
+const StyledAddEdit = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   max-width: 60%;
-  margin: 1rem auto;
+  margin: 0 auto;
   background-color: #e84c3d;
   padding: 1rem;
   border-radius: 0.2rem;
-  color: #1d2121;
   box-shadow: 2px 2px rgb(29, 33, 33, 0.5);
+  color: #1d2121;
 
   h2 {
     font-size: 2.4rem;
   }
 
-  .form-field {
+  .input-container {
     min-width: 40%;
     display: flex;
     flex-direction: column;
@@ -28,7 +28,12 @@ const StyledSignIn = styled.form`
       font-size: 1.2rem;
       margin-bottom: 0.2rem;
     }
-    input {
+    input,
+    select,
+    textarea {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
       width: 100%;
       padding: 0.4rem;
       font-size: 1.2rem;
@@ -56,20 +61,20 @@ const StyledSignIn = styled.form`
         cursor: default;
       }
     }
-
     p {
       color: #f3f3f3;
     }
   }
 
-  a {
-    margin: 1rem;
-    text-decoration: none;
-    color: #1d2121;
-    font-size: 1.2rem;
+  div {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1rem 0 0 0;
+  }
 
-    &:hover {
-      text-decoration: underline;
+  @media (max-width: 1050px) {
+    .input-container {
+      min-width: 90%;
     }
   }
 
@@ -83,10 +88,13 @@ const StyledSignIn = styled.form`
     label {
       font-size: 0.8rem;
     }
-    input {
+    input,
+    select,
+    textarea {
+      min-width: 100%;
       font-size: 0.8rem;
     }
   }
 `;
 
-export default StyledSignIn;
+export default StyledAddEdit;

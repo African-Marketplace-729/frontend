@@ -1,6 +1,7 @@
-import React from 'react';
-import {Switch, Route, Link} from 'react-router-dom';
-import {PrivateRoute} from './utils/PrivateRoute';
+import React from "react";
+import { Switch, Route, Link } from "react-router-dom";
+import { PrivateRoute } from "./utils/PrivateRoute";
+
 
 import Register from './components/Register';
 import Signin from './components/Signin';
@@ -10,16 +11,17 @@ import Listings from './components/Listings';
 import InitialListings from './components/InitialListings';
 import UserProfileCreation from './components/UserProfileCreation';
 
-import './App.css';
-import ConfirmPassword from './components/ConfirmPassword';
-
 function App() {
   return (
     <div className="App">
       <h1>African Marketplace</h1>
       {/* Delete <br> and <hr> when styling */}
-      <br/><br/><hr/><br/>
+      <br />
+      <br />
+      <hr />
+      <br />
       <Switch>
+
         <PrivateRoute path='/profile' component={UserProfile} />
         <PrivateRoute path='/pricecheck' component={InitialListings} />
         <PrivateRoute path='/listings' component={Listings} />

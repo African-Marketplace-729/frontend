@@ -7,5 +7,5 @@ export default yup.object().shape({
   subcategory: yup.string().required("Subcategory required"),
   product: yup.string().required("Product required"),
   quantity: yup.number().required("Quantity requried"),
-  price: yup.number().required("Price required"),
+  price: yup.number().required("Price required").typeError("Price Required"),
 });

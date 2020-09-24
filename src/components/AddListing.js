@@ -153,7 +153,7 @@ function AddListing(props) {
       </article>
 
       <div>
-        Average Price:
+        {'Average Price: '} 
         {props.isFetching && "Loading..."}
         {props.error && values.product && (
           <div style={{ color: "red" }}>{props.error}</div>

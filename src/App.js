@@ -10,11 +10,12 @@ import Listings from "./components/Listings";
 import InitialListings from "./components/InitialListings";
 import UserProfileCreation from "./components/UserProfileCreation";
 import ConfirmPassword from "./components/ConfirmPassword";
-
+import Navbar from "./components/Header";
 
 function App() {
   return (
     <div className="App">
+      <Navbar />
       <h1>African Marketplace</h1>
       {/* Delete <br> and <hr> when styling */}
       <br />
@@ -22,7 +23,9 @@ function App() {
       <hr />
       <br />
       <Switch>
-        <PrivateRoute path="/profile" component={UserProfile} />
+        <PrivateRoute path="/profile">
+          <UserProfile />
+        </PrivateRoute>
         <PrivateRoute path="/pricecheck" component={InitialListings} />
         <PrivateRoute path="/listings" component={Listings} />
         <PrivateRoute path="/addlisting" component={AddListing} />

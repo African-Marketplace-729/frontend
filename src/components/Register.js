@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-
+import {useHistory} from 'react-router-dom';
 import axios from "axios";
 
 import * as yup from "yup";
@@ -22,10 +22,10 @@ const initialErrors = {
 
 export default function Register() {
   const [values, setValues] = useState(initialValues);
-  const [users, setUsers] = useState([]);
   const [errors, setErrors] = useState(initialErrors);
   const [disabled, setDisabled] = useState(true);
   const confirmRef = useRef();
+  const history = useHistory();
 
   const validate = (name, value) => {
     yup
@@ -61,16 +61,22 @@ export default function Register() {
       username: values.username.trim(),
       password: values.password.trim(),
     };
-
-    axios
-      .post("https://lambda-agora.herokuapp.com/createnewuser", newUser)
-      .then(res => {
-        localStorage.setItem("token", res.data.access_token);
-        localStorage.setItem("username", newUser.username);
-        setValues(initialValues);
-      })
-      .catch(err => console.log(err));
-  };
+  
+    axios.post(
+      'https://lambda-agora.herokuapp.com/createnewuser',
+      newUser
+    )
+        .then(res => {
+          localStorage.setItem('token', res.data.access_token);
+          localStorage.setItem('username', newUser.username);
+          history.push('/pricecheck');
+        })
+        .catch(err => console.log(err))
+        .finally(res => {
+          setValues(initialValues);
+        })
+    };
+  
 
   useEffect(() => {
     if (confirmRef.current.value === values.password) {
@@ -133,5 +139,5 @@ export default function Register() {
         <Link to="/signin">Already have an account?</Link>
       </StyledSignIn>
     </>
-  );
+  )
 }

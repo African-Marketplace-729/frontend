@@ -1,37 +1,44 @@
 import React, { useState, useEffect } from "react";
 
-export default function Listing({ listing }) {
-  return (
-    <section className="listings-container">
-      <h2>Current Listings</h2>
-      <article className="listing">
-        {listing.user.fname && listing.user.lname && (
-          <article className="listing-info">
-            <h4>Listing Provider:</h4>
-            <p>{listing.user.fname + " " + listing.user.lname}</p>
-          </article>
-        )}
-        <article className="listing-info">
-          <h4>Category:</h4>
-          <p>{listing.category}</p>
+export default function Listing(listing) {
+  console.log(listing);
+  
+  if (listing !== undefined){
+    return (
+      <section className="listings-container">
+        <article className="listing">
+          {listing.user && (
+            <article className="listing-info">
+              <h4>Listing Provider:</h4>
+              <p>{listing.user.fname + " " + listing.user.lname}</p>
+            </article>
+          )}
+          {listing.listingname && 
+            <article className="listing-info">
+              <h4>Product:</h4>
+              <p>{listing.listingname}</p>
+            </article>
+          }
+          
+          {listing.description &&
+            <article className="listing-info">
+              <h4>Description: </h4>
+              <p>{listing.description}</p>
+            </article>}
+          {listing.quantity && 
+            <article className="listing-info">
+              <h4>Quantity:</h4>
+              <p>{listing.quantity}</p>
+            </article>}
+          {listing.price && 
+            <article className="listing-info">
+              <h4>Price:</h4>
+              <p>{listing.price} USD</p>
+            </article>}
         </article>
-        <article className="listing-info">
-          <h4>Subcategory:</h4>
-          <p>{listing.subcategory}</p>
-        </article>
-        <article className="listing-info">
-          <h4>Product:</h4>
-          <p>{listing.product}</p>
-        </article>
-        <article className="listing-info">
-          <h4>Quantity:</h4>
-          <p>{listing.quantity}</p>
-        </article>
-        <article className="listing-info">
-          <h4>Price:</h4>
-          <p>{listing.price}</p>
-        </article>
-      </article>
-    </section>
-  );
+      </section>
+    );
+  } else {
+    return null;
+  }
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {useHistory} from 'react-router-dom';
 import styled from "styled-components";
 import axios from "axios";
 import * as yup from "yup";
@@ -22,6 +23,8 @@ function Signin(props) {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState(initialErrors);
   const [disabled, setDisabled] = useState(true);
+
+  const history = useHistory();
 
   const validate = (name, value) => {
     yup
@@ -60,7 +63,9 @@ function Signin(props) {
 
     props.postSignin(creds);
     setValues(initialValues);
-  };
+    history.push('/pricecheck')
+  }
+
 
   useEffect(() => {
     schema.isValid(values).then(valid => {

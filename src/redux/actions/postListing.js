@@ -6,7 +6,7 @@ export const POST_LISTING_ERROR = 'POST_LISTING_ERROR'
 
 export const postListing = (listing) => (dispatch) => {
     dispatch({type: POST_LISTING_START})
-    axiosWithAuth().get('/listings/listing')
+    axiosWithAuth().post('/listings/listing', listing)
     .then(res => dispatch({
         type: POST_LISTING_SUCCESS,
         payload: res.data

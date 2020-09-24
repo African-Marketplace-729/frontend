@@ -16,13 +16,17 @@ function Listings(props) {
     return <div style={{ color: "red" }}>{error}</div>;
   }
 
-  return (
-    <div className="listings-container">
-      {data.map(listing => (
-        <Listing key={`listing-${listing.id}`} {...listing} />
-      ))}
-    </div>
-  );
+
+    return (
+        <div className='listings-container'>
+            <h3>Current Listings: </h3>
+            {data.map(listing => {
+                console.log(listing);
+                return <Listing key={`listing-${listing.listingid}`} {...listing} />
+                }    
+            )}
+        </div>
+        )
 }
 
 function mapStateToProps(state) {

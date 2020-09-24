@@ -10,7 +10,7 @@ import Listings from "./components/Listings";
 import InitialListings from "./components/InitialListings";
 import UserProfileCreation from "./components/UserProfileCreation";
 import ConfirmPassword from "./components/ConfirmPassword";
-
+import Header from "./components/Header";
 
 function App() {
   return (
@@ -22,12 +22,28 @@ function App() {
       <hr />
       <br />
       <Switch>
-        <PrivateRoute path="/profile" component={UserProfile} />
-        <PrivateRoute path="/pricecheck" component={InitialListings} />
-        <PrivateRoute path="/listings" component={Listings} />
-        <PrivateRoute path="/addlisting" component={AddListing} />
-        <PrivateRoute path="/confirm" component={ConfirmPassword} />
-        <PrivateRoute path="/createprofile" component={UserProfileCreation} />
+
+        <PrivateRoute path="/profile">
+          <Header />
+          <UserProfile />
+        </PrivateRoute>
+        <PrivateRoute path="/pricecheck">
+          <Header />
+          <InitialListings />
+        </PrivateRoute>
+        <PrivateRoute path="/listings">
+          <Header />
+          <Listings />
+        </PrivateRoute>
+        <PrivateRoute path="/addlisting">
+          <Header />
+          <AddListing />
+        </PrivateRoute>
+        <PrivateRoute path="/confirm">
+          <Header />
+          <ConfirmPassword />
+        </PrivateRoute>
+
         <Route path="/signin" component={Signin} />
         <Route path="/register" component={Register} />
         <Route path="/" component={Register} />
@@ -37,7 +53,7 @@ function App() {
       <UserProfile />
       
        */}
-      {/* <UserProfileCreation /> */}
+      <UserProfileCreation />
     </div>
   );
 }

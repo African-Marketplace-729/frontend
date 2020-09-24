@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledHeader = styled.header`
   background-color: #1d2121;
   width: 100%;
-  padding: 2rem;
+  padding: 1.25rem;
   margin-top: 1%;
   display: flex;
   justify-content: space-evenly;
@@ -20,7 +20,7 @@ const StyledHeader = styled.header`
 
     a {
       color: #f3f3f3;
-      font-size: 1.5rem;
+      font-size: 0.9375rem;
       text-decoration: none;
       padding: 0.5rem;
 

@@ -64,8 +64,8 @@ function AddListing(props) {
 
   const onSubmit = e => {
     e.preventDefault();
-    let {category, subcategory, product, ...sentValues} = values
-    sentValues = {...sentValues, imageurl: ''}
+    let { category, subcategory, product, ...sentValues } = values;
+    sentValues = { ...sentValues, imageurl: "" };
     props.postListing(sentValues);
     setValues(initialValues);
   };
@@ -85,18 +85,18 @@ function AddListing(props) {
       <h2>Add a Listing</h2>
 
       <article className="input-container">
-        <label htmlFor="listingname">
-          Listing Name
-          <input type="text" name="listingname" onChange={onChange} />
-        </label>
-        <label htmlFor="description">
-          Description
-          <textarea
-            name="description"
-            value={values.description}
-            onChange={onChange}
-          />
-        </label>
+
+        <label htmlFor="listingname">Listing Name</label>
+        <input type="text" name="listingname" onChange={onChange} />
+      </article>
+
+      <article className="input-container">
+        <label htmlFor="description">Description</label>
+        <textarea
+          name="description"
+          value={values.description}
+          onChange={onChange}
+        />
       </article>
 
       <article className="input-container">

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { fetchPricing } from "../redux/actions/fetchPricing";
 import { postListing } from "../redux/actions/postListing";
 import { connect } from "react-redux";
-import StyledAddEdit from "./StyledComponents/StyledAddEdit";
 
 import {
   SAUTI_PRODUCT_CATEGORIES,
@@ -17,8 +16,9 @@ const initialValues = {
   description: "",
   category: "",
   subcategory: "",
-  quantity: 0,
-  price: 0,
+  product: "",
+  quantity: "",
+  price: "",
 };
 
 const initialErrors = {
@@ -30,7 +30,7 @@ const initialErrors = {
   price: "",
 };
 
-function AddListing(props) {
+function EditListing(props, data) {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState(initialErrors);
   const [disabled, setDisabled] = useState(true);
@@ -39,13 +39,13 @@ function AddListing(props) {
     yup
       .reach(schema, name)
       .validate(value)
-      .then(valid => {
+      .then((valid) => {
         setErrors({
           ...errors,
           [name]: "",
         });
       })
-      .catch(err => {
+      .catch((err) => {
         setErrors({
           ...errors,
           [name]: err.errors[0],
@@ -53,7 +53,7 @@ function AddListing(props) {
       });
   };
 
-  const onChange = e => {
+  const onChange = (e) => {
     const { name, value } = e.target;
     validate(name, value);
     setValues({
@@ -62,16 +62,13 @@ function AddListing(props) {
     });
   };
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    let { category, subcategory, product, ...sentValues } = values;
-    sentValues = { ...sentValues, imageurl: "" };
-    props.postListing(sentValues);
-    setValues(initialValues);
+    props.postListing(values);
   };
 
   useEffect(() => {
-    schema.isValid(values).then(valid => {
+    schema.isValid(values).then((valid) => {
       setDisabled(!valid);
     });
   }, [values]);
@@ -81,43 +78,39 @@ function AddListing(props) {
   }, [values.product]);
 
   return (
-    <StyledAddEdit onSubmit={onSubmit}>
+    <form onSubmit={onSubmit}>
       <h2>Add a Listing</h2>
-
-      <article className="input-container">
-
-        <label htmlFor="listingname">Listing Name</label>
-        <input type="text" name="listingname" onChange={onChange} />
-      </article>
-
-      <article className="input-container">
-        <label htmlFor="description">Description</label>
+      <label htmlFor="name">
+        Listing Name
+        <input type="text" name="name" onChange={onChange} />
+      </label>
+      <label htmlFor="description">
+        Description
         <textarea
+          defaultValue="Please enter "
           name="description"
           value={values.description}
           onChange={onChange}
         />
-      </article>
-
-      <article className="input-container">
-        <label htmlFor="category">Category</label>
+      </label>
+      <label htmlFor="category">
+        Category
         <select name="category" value={values.category} onChange={onChange}>
           <option value="">--Select a Category--</option>
-          {SAUTI_PRODUCT_CATEGORIES.map(item => {
+          {SAUTI_PRODUCT_CATEGORIES.map((item) => {
             return <option value={item}>{item}</option>;
           })}
         </select>
-      </article>
-
-      <article className="input-container">
-        <label htmlFor="subcategory">Subcategory</label>
+      </label>
+      <label htmlFor="subcategory">
+        Subcategory
         <select
           name="subcategory"
           value={values.subcategory}
           onChange={onChange}
         >
           <option value="">--Select a Subcategory--</option>
-          {SAUTI_PRODUCT_SUBCATEGORIES.map(item => {
+          {SAUTI_PRODUCT_SUBCATEGORIES.map((item) => {
             if (item.category === values.category)
               return (
                 <option value={item.subcategory}>{item.subcategory}</option>
@@ -125,13 +118,12 @@ function AddListing(props) {
             return null;
           })}
         </select>
-      </article>
-
-      <article className="input-container">
-        <label htmlFor="product">Product</label>
+      </label>
+      <label htmlFor="product">
+        Product
         <select name="product" value={values.product} onChange={onChange}>
-          <option value="">--Select a Product--</option>
-          {SAUTI_PRODUCTS.map(item => {
+          <option value="">--Select a Product</option>
+          {SAUTI_PRODUCTS.map((item) => {
             if (
               item.category === values.category &&
               item.subcategory === values.subcategory
@@ -140,18 +132,16 @@ function AddListing(props) {
             return null;
           })}
         </select>
-      </article>
-
-      <article className="input-container">
-        <label htmlFor="quantity">Quantity</label>
+      </label>
+      <label htmlFor="quantity">
+        Quantity
         <input
           type="number"
           value={values.quantity}
           onChange={onChange}
           name="quantity"
         />
-      </article>
-
+      </label>
       <div>
         Average Price:
         {props.isFetching && "Loading..."}
@@ -159,37 +149,31 @@ function AddListing(props) {
           <div style={{ color: "red" }}>{props.error}</div>
         )}
         {props.data.records &&
-          (
-            props.data.records.reduce((acc, cur) => {
-              return acc + cur.retail;
-            }, 0) / props.data.records.length
-          ).toFixed(2) +
+          props.data.records.reduce((acc, cur) => {
+            return acc + cur.retail;
+          }, 0) /
+            props.data.records.length +
             " " +
-            props.data.records[0].currency +
-            " per " +
-            props.data.records[0].unit}
+            props.data.records[0].currency}
       </div>
-
-      <article className="input-container">
-        <label htmlFor="price">Price</label>
+      <label htmlFor="price">
+        Price
         <input
           type="number"
           values={values.number}
           name="price"
           onChange={onChange}
         />
-      </article>
-      <article className="btn-container">
-        <button disabled={disabled}>Add</button>
-        {errors.name ? <p>{errors.name}</p> : null}
-        {errors.description ? <p>{errors.description}</p> : null}
-        {errors.category ? <p>{errors.category}</p> : null}
-        {errors.subcategory ? <p>{errors.subcategory}</p> : null}
-        {errors.product ? <p>{errors.product}</p> : null}
-        {errors.quantity ? <p>{errors.quantity}</p> : null}
-        {errors.price ? <p>{errors.price}</p> : null}
-      </article>
-    </StyledAddEdit>
+      </label>
+      <button disabled={disabled}>Add</button>
+      <p>{errors.name}</p>
+      <p>{errors.description}</p>
+      <p>{errors.category}</p>
+      <p>{errors.subcategory}</p>
+      <p>{errors.product}</p>
+      <p>{errors.quantity}</p>
+      <p>{errors.price}</p>
+    </form>
   );
 }
 
@@ -205,5 +189,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { fetchPricing, postListing })(
-  AddListing
+  EditListing
 );

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+
 export default function Listing(listing) {
   console.log(listing);
   
@@ -7,19 +8,18 @@ export default function Listing(listing) {
     return (
       <section className="listings-container">
         <article className="listing">
-          {listing.user && (
+          {listing.user && 
             <article className="listing-info">
               <h4>Listing Provider:</h4>
               <p>{listing.user.fname + " " + listing.user.lname}</p>
             </article>
-          )}
+          }
           {listing.listingname && 
             <article className="listing-info">
               <h4>Product:</h4>
               <p>{listing.listingname}</p>
             </article>
           }
-          
           {listing.description &&
             <article className="listing-info">
               <h4>Description: </h4>

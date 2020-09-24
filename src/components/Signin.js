@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {useHistory} from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import * as yup from "yup";
@@ -30,13 +30,13 @@ function Signin(props) {
     yup
       .reach(schema, name)
       .validate(value)
-      .then(valid => {
+      .then((valid) => {
         setErrors({
           ...errors,
           [name]: "",
         });
       })
-      .catch(err => {
+      .catch((err) => {
         setErrors({
           ...errors,
           [name]: err.errors[0],
@@ -44,7 +44,7 @@ function Signin(props) {
       });
   };
 
-  const onChange = e => {
+  const onChange = (e) => {
     const { name, value } = e.target;
     validate(name, value);
     setValues({
@@ -53,7 +53,7 @@ function Signin(props) {
     });
   };
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
 
     const creds = {
@@ -63,12 +63,11 @@ function Signin(props) {
 
     props.postSignin(creds);
     setValues(initialValues);
-    history.push('/pricecheck')
-  }
-
+    history.push("/pricecheck");
+  };
 
   useEffect(() => {
-    schema.isValid(values).then(valid => {
+    schema.isValid(values).then((valid) => {
       setDisabled(!valid);
     });
   }, [values]);

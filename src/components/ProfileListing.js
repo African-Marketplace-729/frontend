@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
 export default function ProfileListing(props){
 
@@ -10,6 +11,10 @@ export default function ProfileListing(props){
             Price: {props.price} USD<br/>
             Quantity: {props.quantity}
             {/* Enter props.imageurl for image later */}
+            <Link to="/src/components/profileEditListing.js/" classname="editbutton">
+              edit?
+            </Link>
         </div>
     )
 }
+

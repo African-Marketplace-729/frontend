@@ -35,7 +35,7 @@ function App() {
       <UserProfile />
       
        */}
-      {/* <UserProfileCreation /> */}
+      <UserProfileCreation />
     </div>
   );
 }

@@ -1,19 +1,21 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 
-export default function ProfileListing(props){
+export default function ProfileListing({listing, setBeingEdited, beingEdited}){
 
-
+function onClick(event){
+    event.stopPropagation();
+    console.log(setBeingEdited)
+    setBeingEdited(listing.listingid);
+    
+}
     return (
         <div className='listing-container'>
-            Item: {props.listingname}<br/>
-            Description: {props.description}<br/>
-            Price: {props.price} USD<br/>
-            Quantity: {props.quantity}
+            Item: {listing.listingname}<br/>
+            Description: {listing.description}<br/>
+            Price: {listing.price} USD<br/>
+            Quantity: {listing.quantity}
             {/* Enter props.imageurl for image later */}
-            <Link to="/src/components/profileEditListing.js/" classname="editbutton">
-              edit?
-            </Link>
+            <button onClick={onClick}>edit</button>
         </div>
     )
 }

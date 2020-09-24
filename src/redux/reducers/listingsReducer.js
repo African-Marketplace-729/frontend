@@ -10,6 +10,12 @@ import {
     POST_LISTING_ERROR
 } from '../actions/postListing'
 
+import {
+    PUT_LISTING_START,
+    PUT_LISTING_SUCCESS,
+    PUT_LISTING_ERROR
+} from '../actions/putListing'
+
 const initialState = {
     data: [],
     isFetching: false,
@@ -61,6 +67,27 @@ export function reducer (state = initialState, action){
                 postData: [],
                 isPosting: false,
                 postError: action.payload
+            }
+        case PUT_LISTING_START:
+            return {
+                ...state,
+                putData: [],
+                isPuting: true,
+                putError: ''
+            }
+        case PUT_LISTING_SUCCESS:
+            return {
+                ...state,
+                putData: action.payload,
+                isPuting: false,
+                putError: ''
+            }
+        case PUT_LISTING_ERROR:
+            return {
+                ...state,
+                putData: [],
+                isPuting: false,
+                putError: action.payload
             }
         default:
             return state;

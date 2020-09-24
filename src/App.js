@@ -22,6 +22,7 @@ function App() {
       <hr />
       <br />
       <Switch>
+
         <PrivateRoute path="/profile">
           <Header />
           <UserProfile />
@@ -42,6 +43,7 @@ function App() {
           <Header />
           <ConfirmPassword />
         </PrivateRoute>
+
         <Route path="/signin" component={Signin} />
         <Route path="/register" component={Register} />
         <Route path="/" component={Register} />

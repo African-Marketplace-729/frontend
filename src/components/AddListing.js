@@ -64,8 +64,8 @@ function AddListing(props) {
 
   const onSubmit = e => {
     e.preventDefault();
-    let {category, subcategory, product, ...sentValues} = values
-    sentValues = {...sentValues, imageurl: ''}
+    let { category, subcategory, product, ...sentValues } = values;
+    sentValues = { ...sentValues, imageurl: "" };
     props.postListing(sentValues);
     setValues(initialValues);
   };
@@ -84,12 +84,13 @@ function AddListing(props) {
     <StyledAddEdit onSubmit={onSubmit}>
       <h2>Add a Listing</h2>
 
-      <label htmlFor="listingname">
-        Listing Name
+      <article className="input-container">
+        <label htmlFor="listingname">Listing Name</label>
         <input type="text" name="listingname" onChange={onChange} />
-      </label>
-      <label htmlFor="description">
-        Description
+      </article>
+
+      <article className="input-container">
+        <label htmlFor="description">Description</label>
         <textarea
           name="description"
           value={values.description}

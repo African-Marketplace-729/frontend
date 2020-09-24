@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import StyledListing from './StyledComponents/StyledListing';
 export default function ProfileListing({listing, setBeingEdited, beingEdited}){
 
 function onClick(event){
@@ -9,14 +9,20 @@ function onClick(event){
     
 }
     return (
-        <div className='listing-container'>
-            Item: {listing.listingname}<br/>
-            Description: {listing.description}<br/>
-            Price: {listing.price} USD<br/>
-            Quantity: {listing.quantity}
+        <StyledListing className='listing-container'>
+            {listing.listingname}
+            <div className='description'>
+                {listing.description}    
+            </div>
+            <div className='price'>
+                {listing.price} USD
+            </div>
+            <div className='quantity'>
+               Quantity: {listing.quantity}
+            </div>
             {/* Enter props.imageurl for image later */}
             <button onClick={onClick}>edit</button>
-        </div>
+        </ StyledListing>
     )
 }
 

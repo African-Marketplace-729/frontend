@@ -11,6 +11,7 @@ import InitialListings from "./components/InitialListings";
 import UserProfileCreation from "./components/UserProfileCreation";
 import ConfirmPassword from "./components/ConfirmPassword";
 
+import './App.css';
 
 function App() {
   return (

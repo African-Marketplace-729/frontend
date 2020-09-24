@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import {connect} from 'react-redux';
 import {fetchUser} from '../redux/actions/fetchUser';
-import axiosWithAuth from '../utils/axiosWithAuth';
 import ProfileListing from './ProfileListing';
 import {useHistory} from 'react-router-dom';
 import ProfileEditListing from './ProfileEditListing';
+import StyledProfile from './StyledComponents/StyledProfile';
 
 function UserProfile(props){
  let [beingEdited, setBeingEdited] = useState('');
@@ -15,10 +15,6 @@ const history = useHistory();
 useEffect(() => {
         props.fetchUser(localStorage.getItem('username'));
 }, [])
-
-// useEffect(() => {
-//     props.fetchUser(localStorage.getItem('username'));
-//   },[beingEdited])
 
 function onClick (event) {
     history.push('/confirm');
@@ -32,21 +28,44 @@ function onClick (event) {
     }
     return (
         props.data ?  (
-            <div className='profile-container'>
-                <h1> User Profile Goes Here</h1>
+            <StyledProfile className='profile-container'>
                 <div>
-                    <h3>
-                        {'Name: '} 
+                    <div>
+                        <h4>
+                            Name
+                        </h4>
                         {props.data.fname !== null ? props.data.fname + " ": ''}
                         {props.data.lname !== null ? props.data.lname : ''}
-                    </h3>
-                    <h3>Picture: </h3>
-                    <h3>Phone Number: {props.data.phonenumber && props.data.phonenumber}</h3>
-                    <h3>Email: {props.data.email && props.data.email}</h3>
-                    <h3>Location: { props.data.location ? `${props.data.location.city.cityname}, ${props.data.location.city.country.name}` : ''} </h3>
+                    </div>
+
+                    {/* <h3>Picture: </h3> */}
+                    <div>
+                        <h4>
+                            Phone Number
+                        </h4>
+                        {props.data.phonenumber && props.data.phonenumber}
+                    </div>
+                    <div>
+                        <h4>
+                            Email
+                        </h4>
+                        {props.data.email && props.data.email}
+                    </div>
+                    <div>
+
+                    </div>
+                    <div>
+                        <h4>
+                            Location
+                        </h4>
+                        { props.data.location ? `${props.data.location.city.cityname}, ${props.data.location.city.country.name}` : ''} 
+                    </div>
                     {props.data.listings &&
-                        <h3>
-                            Listings: 
+                        <div className='listings-container'>
+                            <div className='listing-header'>
+                            Listings
+                            </div>
+                            <div className='listing'>
                                 {props.data.listings.map(listing => {
                                     if (beingEdited === listing.listingid){
                                         return <ProfileEditListing listing={listing} setBeingEdited={setBeingEdited} fetchUser={props.fetchUser}/>
@@ -61,11 +80,12 @@ function onClick (event) {
                                         )
                                     }
                                 })}
-                        </h3>
+                            </div>
+                        </div>
                     }
                 </div>
                 <button onClick={onClick}>Become a Vendor</button>   
-            </div> 
+            </StyledProfile> 
         ) : null)
     
 }

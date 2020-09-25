@@ -10,7 +10,7 @@ const UserProfileCreateSchema = Yup.object().shape({
   lname: Yup.string()
     .required("Name is required")
     .min(2, "Name must be longer than 2 characters"),
-  location: Yup.string().required(),
+  // location: Yup.string().required(),
   phonenumber: Yup.number().test(
     "phonenumber",
     "Must be exactly 9 digits",

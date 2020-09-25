@@ -130,7 +130,7 @@ function UserProfileCreation(props) {
             <option value="rwanda">Rwanda</option>
             <option value="uganda">Uganda</option>
           </select> */}
-          <div id="location-holder">
+          {/* <div id="location-holder">
             <label id="location" htmlfor="location">
               Country:{" "}
             </label>
@@ -140,7 +140,7 @@ function UserProfileCreation(props) {
               value={values.location}
               onChange={onChange}
             />
-          </div>
+          </div> */}
         </div>
         <hr />
         <div className="btn-container">

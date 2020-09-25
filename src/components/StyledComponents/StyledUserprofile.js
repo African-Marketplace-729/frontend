@@ -5,16 +5,37 @@ const StyledUserProfile = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 60%;
+  max-width: 50%;
   margin: 0 auto;
   background-color: #e84c3d;
-  padding: 1rem;
+  padding: 0.2rem;
   border-radius: 0.2rem;
+
+  form {
+    width: 90%;
+  }
 
   h2 {
     font-size: 2.4rem;
+    text-align: center;
   }
 
+  #location-holder {
+    display: flex;
+    justify-content: center;
+  }
+  #location-holder label {
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+    padding: 0 0.5rem 0 0.5rem;
+  }
+  #location-holder input {
+    width: 35%;
+    padding: 0.4rem;
+    font-size: 1.2rem;
+    border-radius: 0.2rem;
+    background-color: #f3f3f3;
+  }
   .form-field {
     min-width: 80%;
     display: flex;
@@ -23,8 +44,10 @@ const StyledUserProfile = styled.form`
     margin: 0.5rem auto 1rem auto;
 
     label {
+      width: 40%;
       font-size: 1.2rem;
       margin-bottom: 0.2rem;
+      padding: 0 0.5rem 0 0.5rem;
     }
     input {
       width: 50%;

@@ -39,11 +39,11 @@ function InitialListings({ data, isFetching, error, fetchPricing }) {
               </div>
               <div class="data">
                 <h2>Retail Price:</h2>
-                <p>{`${record.retail.toFixed(2)} per ${record.unit}`} </p>
+                <p>{`${record.retail.toFixed(2)} USD per ${record.unit}`} </p>
               </div>
               <div class="data">
                 <h2>Wholesale Price: </h2>
-                <p>{`${record.wholesale.toFixed(2)} per ${record.unit}`} </p>
+                <p>{`${record.wholesale.toFixed(2)} USD per ${record.unit}`} </p>
               </div>
             </Styledlistings>
           );

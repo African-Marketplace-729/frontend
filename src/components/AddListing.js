@@ -64,11 +64,11 @@ function AddListing(props) {
     });
   };
 
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault();
     let { category, subcategory, product, ...sentValues } = values;
     sentValues = { ...sentValues, imageurl: "" };
-    props.postListing(sentValues);
+    await props.postListing(sentValues);
     setValues(initialValues);
     history.push('/profile')
   };

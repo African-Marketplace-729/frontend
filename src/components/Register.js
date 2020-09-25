@@ -69,7 +69,7 @@ export default function Register() {
         .then(res => {
           localStorage.setItem('token', res.data.access_token);
           localStorage.setItem('username', newUser.username);
-          history.push('/pricecheck');
+          history.push('/profile');
         })
         .catch(err => console.log(err))
         .finally(res => {

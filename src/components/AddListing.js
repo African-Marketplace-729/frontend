@@ -73,6 +73,10 @@ function AddListing(props) {
     history.push('/profile')
   };
 
+  const onClick = e => {
+    e.preventDefault()
+    history.push('/confirm')
+  }
   useEffect(() => {
     schema.isValid(values).then(valid => {
       setDisabled(!valid);
@@ -85,8 +89,8 @@ function AddListing(props) {
 
   return (
     <StyledAddEdit onSubmit={onSubmit}>
+      <button onClick={onClick}>Become a Vendor</button>
       <h2>Add a Listing</h2>
-
       <article className="input-container">
 
         <label htmlFor="listingname">Listing Name</label>

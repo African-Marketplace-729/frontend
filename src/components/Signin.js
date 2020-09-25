@@ -61,7 +61,7 @@ function Signin(props) {
 
     props.postSignin(creds);
     setValues(initialValues);
-    history.push("/pricecheck");
+    history.push("/product");
   };
 
   useEffect(() => {

@@ -63,6 +63,7 @@ function EditListing(props) {
   };
 
   const onClick = (e) => {
+    e.preventDefault();
     props.deleteListing(props.listing)
   }
   useEffect(() => {
@@ -81,7 +82,7 @@ function EditListing(props) {
   return (
   <>
     <StyledAddEdit onSubmit={onSubmit}>
-      <h2>Add a Listing</h2>
+      <h2>Edit Listing</h2>
       <label htmlFor="listingname">
         Listing Name
         <input 
@@ -178,8 +179,8 @@ function EditListing(props) {
       <p>{errors.product}</p>
       <p>{errors.quantity}</p>
       <p>{errors.price}</p>
-    </StyledAddEdit>
     <button onClick={onClick}>Delete Listing</button>
+    </StyledAddEdit>
   </>
   );
 }

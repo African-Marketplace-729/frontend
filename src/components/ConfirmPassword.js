@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import {useHistory} from 'react-router-dom';
+import StyledAddEdit from './StyledComponents/StyledAddEdit';
+
 const initialValues = {
     password: '',
 }
@@ -44,7 +46,7 @@ function onSubmit (event){
     }
 
     return (
-        <form onSubmit={onSubmit}>
+        <StyledAddEdit onSubmit={onSubmit}>
             <label htmlFor='password'>Enter Password:
                 <input 
                 name='password'
@@ -55,7 +57,7 @@ function onSubmit (event){
                 />
             </label>
             <button>Confirm Password</button>
-            {error !== '' && <div style={{color: 'red'}}>{error}</div>}
-        </form>
+            {error !== '' && <div style={{color: 'white'}}>{error}</div>}
+        </StyledAddEdit>
     )
 }

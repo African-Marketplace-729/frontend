@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-
-
+import StyledListing from './StyledComponents/StyledListingb';
 export default function Listing(listing) {
   console.log(listing);
   
   if (listing !== undefined){
     return (
-      <section className="listings-container">
-        <article className="listing">
+
+        <article className="listing-comp-container">
           {listing.user && 
             <article className="listing-info">
               <h4>Listing Provider:</h4>
@@ -36,7 +35,6 @@ export default function Listing(listing) {
               <p>{listing.price} USD</p>
             </article>}
         </article>
-      </section>
     );
   } else {
     return null;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { fetchListings } from "../redux/actions/fetchListings";
 import Listing from "./Listing";
+import StyledListing from './StyledComponents/StyledListing';
 
 function Listings(props) {
   const { isFetching, data, error, fetchListings } = props;
@@ -18,14 +19,16 @@ function Listings(props) {
 
 
     return (
-        <div className='listings-container'>
-            <h3>Current Listings: </h3>
+        <StyledListing>
+          <h4>Current Listings: </h4>
+          <div className='listings-container'>
             {data.map(listing => {
                 console.log(listing);
                 return <Listing key={`listing-${listing.listingid}`} {...listing} />
                 }    
             )}
-        </div>
+          </div>
+        </StyledListing>
         )
 }
 

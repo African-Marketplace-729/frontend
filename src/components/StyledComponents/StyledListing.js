@@ -5,7 +5,7 @@ const StyledAddEdit = styled.div`
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  width: 35%;
+  width: 80%;
   margin: 1rem auto;
   background-color: #1d2121;
   padding: 0.25rem;
@@ -89,6 +89,25 @@ const StyledAddEdit = styled.div`
   .description {
       font-size: 1.2rem;
   }
+
+  .listings-container{
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+
+      background-color: #f3f3f3;
+      color:  #1d2121
+  }
+  
+  .listing-comp-container {
+      width: 40%;
+      margin: 1rem 0;
+      box-shadow: 0px 0px 2px 2px rgb(29, 33, 33, 0.5);
+  }
+  
+
   @media (max-width: 1050px) {
     .input-container {
       min-width: 90%;

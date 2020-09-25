@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { fetchPricing } from "../redux/actions/fetchPricing";
 import { putListing } from "../redux/actions/putListing";
+import { deleteListing} from "../redux/actions/deleteListing";
 import { fetchListings} from '../redux/actions/fetchListings';
 import { connect } from "react-redux";
+import StyledAddEdit from './StyledComponents/StyledAddEdit';
 
 import {
   SAUTI_PRODUCT_CATEGORIES,
@@ -60,6 +62,9 @@ function EditListing(props) {
     props.setBeingEdited('');
   };
 
+  const onClick = (e) => {
+    props.deleteListing(props.listing)
+  }
   useEffect(() => {
     let {category, subcategory, product, ...rest} = values;
     schema.isValid(values).then((valid) => {
@@ -74,7 +79,8 @@ function EditListing(props) {
   }, [values.product]);
 
   return (
-    <form onSubmit={onSubmit}>
+  <>
+    <StyledAddEdit onSubmit={onSubmit}>
       <h2>Add a Listing</h2>
       <label htmlFor="listingname">
         Listing Name
@@ -172,7 +178,9 @@ function EditListing(props) {
       <p>{errors.product}</p>
       <p>{errors.quantity}</p>
       <p>{errors.price}</p>
-    </form>
+    </StyledAddEdit>
+    <button onClick={onClick}>Delete Listing</button>
+  </>
   );
 }
 
@@ -187,6 +195,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchPricing, fetchListings, putListing })(
+export default connect(mapStateToProps, { fetchPricing, fetchListings, putListing, deleteListing })(
   EditListing
 );

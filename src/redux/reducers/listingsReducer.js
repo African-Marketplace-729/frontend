@@ -16,6 +16,12 @@ import {
     PUT_LISTING_ERROR
 } from '../actions/putListing'
 
+import {
+    DELETE_LISTING_START,
+    DELETE_LISTING_SUCCESS,
+    DELETE_LISTING_ERROR
+} from '../actions/deleteListing';
+
 const initialState = {
     data: [],
     isFetching: false,
@@ -23,6 +29,9 @@ const initialState = {
     postData: [],
     isPosting: false,
     postError: '',
+    deleteData: [],
+    isDeleting: '',
+    deleteError: '',
 }
 export function reducer (state = initialState, action){
     switch(action.type){
@@ -82,13 +91,34 @@ export function reducer (state = initialState, action){
                 isPuting: false,
                 putError: ''
             }
-        case PUT_LISTING_ERROR:
+        case DELETE_LISTING_ERROR:
             return {
                 ...state,
-                putData: [],
-                isPuting: false,
-                putError: action.payload
+                deleteData: [],
+                isDeleting: false,
+                deleteError: action.payload
             }
+            case DELETE_LISTING_START:
+                return {
+                    ...state,
+                    deleteData: [],
+                    isDeleting: true,
+                    deleteError: ''
+                }
+            case DELETE_LISTING_SUCCESS:
+                return {
+                    ...state,
+                    deleteData: action.payload,
+                    isDeleting: false,
+                    deleteError: ''
+                }
+            case PUT_LISTING_ERROR:
+                return {
+                    ...state,
+                    putData: [],
+                    isPuting: false,
+                    putError: action.payload
+                }
         default:
             return state;
     }

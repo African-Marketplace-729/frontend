@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {connect} from 'react-redux';
 import {putUser} from '../redux/actions/putProfile';
 import * as yup from "yup";
@@ -112,21 +112,13 @@ function UserProfileCreation(props) {
           />
 
           <hr />
-          {/* <label htmlFor="country">Country: </label>
-          <select onChange={onChange} id="country" name="country">
-            <option defaultValue value="kenya">
-              Kenya
-            </option>
-            <option value="rwanda">Rwanda</option>
-            <option value="uganda">Uganda</option>
-          </select> */}
-          <label htmlfor="location">Country: </label>
+          {/* <label htmlfor="location">Country: </label>
           <input
             type="text"
             name="location"
             value={values.location}
             onChange={onChange}
-          />
+          /> */}
         </div>
         <button>Submit</button>
       </form>

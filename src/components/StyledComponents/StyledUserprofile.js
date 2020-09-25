@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledSignIn = styled.form`
+const StyledUserProfile = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,14 +15,10 @@ const StyledSignIn = styled.form`
     font-size: 2.4rem;
   }
 
-  #nameinput {
-    flex-direction: row;
-  }
-
   .form-field {
-    min-width: 40%;
+    min-width: 80%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     margin: 0.5rem auto 1rem auto;
 
@@ -31,7 +27,7 @@ const StyledSignIn = styled.form`
       margin-bottom: 0.2rem;
     }
     input {
-      width: 100%;
+      width: 50%;
       padding: 0.4rem;
       font-size: 1.2rem;
       border-radius: 0.2rem;
@@ -91,4 +87,4 @@ const StyledSignIn = styled.form`
   }
 `;
 
-export default StyledSignIn;
+export default StyledUserProfile;

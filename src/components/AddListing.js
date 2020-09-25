@@ -3,6 +3,7 @@ import { fetchPricing } from "../redux/actions/fetchPricing";
 import { postListing } from "../redux/actions/postListing";
 import { connect } from "react-redux";
 import StyledAddEdit from "./StyledComponents/StyledAddEdit";
+import {useHistory} from 'react-router-dom';
 
 import {
   SAUTI_PRODUCT_CATEGORIES,
@@ -34,6 +35,7 @@ function AddListing(props) {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState(initialErrors);
   const [disabled, setDisabled] = useState(true);
+  const history = useHistory();
 
   const validate = (name, value) => {
     yup
@@ -68,6 +70,7 @@ function AddListing(props) {
     sentValues = { ...sentValues, imageurl: "" };
     props.postListing(sentValues);
     setValues(initialValues);
+    history.push('/profile')
   };
 
   useEffect(() => {

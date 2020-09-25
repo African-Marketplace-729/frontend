@@ -10,7 +10,7 @@ export const putUser = (user) => (dispatch) => {
         .then(res => dispatch({
             type: PUT_USER_SUCCESS,
             payload: res.data
-        }))
+            }))
         .catch(err => dispatch({
             type: PUT_USER_ERROR,
             payload: err.message

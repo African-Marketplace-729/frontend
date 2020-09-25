@@ -84,39 +84,47 @@ function UserProfileCreation(props) {
   return (
     <StyledUserProfile className="profile-container">
       <form onSubmit={onSubmit}>
+        <h2>Business Profile Setup</h2>
         <div>
           <div id="nameinput" className="form-field">
-            <label htmlfor="firstName">First name: </label>
-            <input
-              type="name"
-              name="fname"
-              value={values.fname}
-              onChange={onChange}
-            />
-            <label htmlfor="lastName">Last name: </label>
-            <input
-              type="name"
-              name="lname"
-              value={values.lname}
-              onChange={onChange}
-            />
-            <hr />
+            <>
+              <label htmlfor="firstName">First name: </label>
+              <input
+                type="name"
+                name="fname"
+                value={values.fname}
+                onChange={onChange}
+              />
+            </>
+            <>
+              <label htmlfor="lastName">Last name: </label>
+              <input
+                type="name"
+                name="lname"
+                value={values.lname}
+                onChange={onChange}
+              />
+            </>
           </div>
           <div id="contactinfo" className="form-field">
-            <label htmlfor="email">Email: </label>
-            <input
-              type="email"
-              name="email"
-              value={values.email}
-              onChange={onChange}
-            />
-            <label htmlfor="phonenumber">Phone Number: </label>
-            <input
-              type="number"
-              name="phonenumber"
-              value={values.phonenumber}
-              onChange={onChange}
-            />
+            <>
+              <label htmlfor="email">Email: </label>
+              <input
+                type="email"
+                name="email"
+                value={values.email}
+                onChange={onChange}
+              />{" "}
+            </>
+            <>
+              <label htmlfor="phonenumber">Phone Number: </label>
+              <input
+                type="number"
+                name="phonenumber"
+                value={values.phonenumber}
+                onChange={onChange}
+              />
+            </>
           </div>
           <hr />
     
@@ -130,13 +138,16 @@ function UserProfileCreation(props) {
             onChange={onChange}
           />  */}
         </div>
+        <hr />
         <div className="btn-container">
           <button disabled={disabled}>Submit</button>
-          <p>{errors.fname}</p>
-          <p>{errors.lname}</p>
-          <p>{errors.phonenumber}</p>
-          <p>{errors.email}</p>
-          <p>{errors.location}</p>
+          <div classname="errorsdisplay">
+            <p>{errors.fname}</p>
+            <p>{errors.lname}</p>
+            <p>{errors.phonenumber}</p>
+            <p>{errors.email}</p>
+            <p>{errors.location}</p>
+          </div>
         </div>
       </form>
     </StyledUserProfile>
